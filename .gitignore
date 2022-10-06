@@ -1,3 +1,4 @@
+# github generated ignore file
 # Prerequisites
 *.d
 
@@ -30,3 +31,6 @@
 *.exe
 *.out
 *.app
+
+# others
+*.pdf
