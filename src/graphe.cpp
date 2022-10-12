@@ -1,8 +1,3 @@
-/**
- * Project Untitled
- */
-
-
 #include "graphe.hpp"
 
 /**
@@ -42,17 +37,17 @@ bool Graphe::ajouterSommet(int num)
     return true;
 }
 
-std::string Graphe::print()
+string Graphe::print()
 {
-    std::string printString;
+    string printString;
     int i = 0;
-    std::cout << sommets.size() << std::endl;
+    cout << sommets.size() << endl;
     for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
     {
-        printString += std::to_string(i) + ":" + it->print() + "\n";
+        printString += to_string(i) + ":" + it->print() + "\n";
         i++;
     }
-    // std::cout << "'" << printString << "'" <<std::endl;
+    // cout << "'" << printString << "'" <<endl;
     return printString;
 }
 

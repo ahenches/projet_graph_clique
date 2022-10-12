@@ -1,17 +1,28 @@
 # include <iostream>
 
-# include "graphe.hpp"
-# include "sommet.hpp"
+# include "./src/graphe.hpp"
+# include "./src/sommet.hpp"
+#include "./src/LectureEcriture.hpp"
+
+using namespace std;
 
 int main()
 {
+    /*
     Graphe g(true, 3);
-    std::cout << g.print();
+    cout << g.print();
     g.ajouterArete(0, 1);
-    std::cout << g.print();
+    cout << g.print();
     g.ajouterArc(0, 2);
-    std::cout << g.print();
-    std::cout << "Hello World" << std::endl;
-    // std::cout << "main function\n";
+    cout << g.print();
+    cout << "Hello World" << endl;
+    // cout << "main function\n";
+    */
+   
+    //Mon test
+    string fichier("./fichiers/facebook_combined.txt");
+    LectureEcriture lc;
+    lc.lectureFichierBDD(fichier);
+
     return 0;
 }

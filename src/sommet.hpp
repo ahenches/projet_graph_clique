@@ -1,10 +1,8 @@
-/**
- * Project Untitled
- */
 #include <iostream>
 #include <vector> //Ne pas oublier !
 #include <string>
 
+using namespace std;
 
 #ifndef _SOMMET_H
 #define _SOMMET_H
@@ -12,12 +10,12 @@
 class Sommet {
     private:
     int num;
-    std::vector<Sommet> listeAdj;
+    vector<Sommet> listeAdj;
     
     public:
     Sommet(int numero);
     void ajouterVoisin(Sommet &s);
-    std::string print();
+    string print();
 };
 
 #endif //_SOMMET_H

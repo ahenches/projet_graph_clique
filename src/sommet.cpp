@@ -1,8 +1,3 @@
-/**
- * Project Untitled
- */
-
-
 #include "sommet.hpp"
 
 /**
@@ -17,18 +12,18 @@ Sommet::Sommet(int numero)
 void Sommet::ajouterVoisin(Sommet &voisin)
 {
     this->listeAdj.push_back(voisin);
-    // std::cout << this->listeAdj.size() << std::endl;
+    // cout << this->listeAdj.size() << endl;
 }
 
-std::string Sommet::print()
+string Sommet::print()
 {
-    std::string printString("");
+    string printString("");
     for(auto it = listeAdj.begin() ; it != listeAdj.end() ; ++it)
     {   
-        printString += std::to_string(it->num) + "  ";  //On additionne toutes les notes
+        printString += to_string(it->num) + "  ";  //On additionne toutes les notes
     }
-    // std::cout << printString << std::endl;
-    // std::cout << this->listeAdj.size() << std::endl;
+    // cout << printString << endl;
+    // cout << this->listeAdj.size() << endl;
     return printString;
 
 }
