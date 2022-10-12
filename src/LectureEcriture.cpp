@@ -1,6 +1,6 @@
 #include "LectureEcriture.hpp"
 
-void LectureEcriture::lectureFichierBDD(string nomFichier)
+void lectureFichierBDD(string nomFichier)
 {
     int nbSommet, sommetSource, sommetDest;
     bool oriente;
@@ -31,14 +31,8 @@ void LectureEcriture::lectureFichierBDD(string nomFichier)
         
         while(getline(fichier, ligneAvantDecoupe)) 
         {
-           // ligneDecoupee = decoupeChaine(ligneAvantDecoupe,' ');
-            stringstream ss(ligneAvantDecoupe);
-            string sousChaine;
-            while (getline(ss, sousChaine, ' '))
-            {
-                ligneDecoupee.push_back(stoi(sousChaine));
-            }
-
+           ligneDecoupee = decoupeChaine(ligneAvantDecoupe,' ');
+           
             sommetSource = ligneDecoupee[0];
             sommetDest = ligneDecoupee[1];
             //cout << sommetSource << " destination : " << sommetDest << endl;
@@ -49,17 +43,61 @@ void LectureEcriture::lectureFichierBDD(string nomFichier)
             else{
                 graphe.ajouterArete(sommetSource,sommetDest);
             }
-            ligneDecoupee.clear();
         }
 
         cout << graphe.print();
-
-
     }
-    else
+    else // Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
     }
+}
+
+
+void lecture(string nomFichier)
+{
+    int nbSommet, sommetSource, sommetDest, indice;
+    bool oriente;
+    string ligneAvantDecoupe, tmp;
+    vector<int> ligneDecoupee;
+    ifstream fichier(nomFichier.c_str());  //Ouverture en lecture
+
+    if(fichier)
+    {
+        //Lecture des 2 premieres lignes pour le nombre de sommets et orienté ou non
+        getline(fichier,tmp);
+        nbSommet = stoi(tmp);
+
+        getline(fichier,tmp);
+        oriente = stoi(tmp);
+
+        //Creation graphe
+        Graphe graphe(oriente,nbSommet);
+
+        //Ajout des arcs
+        while(getline(fichier, ligneAvantDecoupe))
+        {
+            ligneDecoupee = decoupeChaine(ligneAvantDecoupe, ' ');
+
+            sommetSource = ligneDecoupee[0];
+            for(indice = 1; indice < static_cast<int>(ligneDecoupee.size()) ; indice++)
+            {
+                sommetDest = ligneDecoupee[indice];
+                graphe.ajouterArc(sommetSource,sommetDest);
+            }
+        }
+
+        cout << graphe.print();
+    }
+    else // Probleme ouverture du fichier
+    {
+        cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
+    }
+}
+
+void ecriture()
+{
+    
 }
 
 vector<int> decoupeChaine(string chaine, char delimiteur)

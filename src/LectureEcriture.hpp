@@ -10,13 +10,9 @@
 
 using namespace std;
 
-class LectureEcriture
-{
-    public :
-    void lectureFichierBDD(string nomFichier);
-    void lecture(string nomFichier);
-    void ecriture();
-    vector<int> decoupeChaine(string chaine, char delimiteur);
-};
+void lectureFichierBDD(string nomFichier);
+void lecture(string nomFichier);
+void ecriture();
+vector<int> decoupeChaine(string chaine, char delimiteur);
 
 #endif

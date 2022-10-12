@@ -20,9 +20,10 @@ int main()
     */
    
     //Mon test
-    string fichier("./fichiers/facebook_combined.txt");
-    LectureEcriture lc;
-    lc.lectureFichierBDD(fichier);
+    //string fichier("./fichiers/facebook_combined.txt");
+    //string fichier("./fichiers/lastfm_asia_target.csv");
+    string fichier("./fichiers/graphe1.txt");
+    lecture(fichier);
 
     return 0;
 }
