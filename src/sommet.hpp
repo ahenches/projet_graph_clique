@@ -13,6 +13,7 @@ class Sommet {
     vector<Sommet> listeAdj;
     
     public:
+    Sommet();
     Sommet(int numero);
     void ajouterVoisin(Sommet &s);
     string print();

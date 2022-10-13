@@ -11,9 +11,35 @@ Graphe::Graphe(bool oriente)
 Graphe::Graphe(bool oriente, int nSommet)
 {
     estOriente = oriente;
+    sommets.resize (nSommet);
+    Sommet s;
     for(int i = 0; i < nSommet; i++)
     {
-        ajouterSommet(i);
+        s = Sommet(i);
+        sommets[i] = s;
+    }
+    nbSommet = nSommet;
+}
+
+void Graphe::genererArcsAleatoires(float prob)
+{
+    srand(time(nullptr));
+    for(long unsigned int i = 0; i < sommets.size(); i++)
+    {
+        for(long unsigned int j = 0; j < i; j++)
+        {
+            if (((float)rand() / (float)RAND_MAX) > prob) 
+            {
+                ajouterArc(i, j);
+            }
+        }
+        for(long unsigned int j = i+1; j < sommets.size(); j++)
+        {
+            if (((float)rand() / (float)RAND_MAX) > prob) 
+            {
+                ajouterArc(i, j);
+            }
+        }
     }
 }
 

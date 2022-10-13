@@ -3,6 +3,10 @@
 /**
  * Sommet implementation
  */
+Sommet::Sommet()
+{
+
+}
 
 Sommet::Sommet(int numero)
 {
