@@ -11,8 +11,8 @@
 using namespace std;
 
 void lectureFichierBDD(string nomFichier);
-void lecture(string nomFichier);
-void ecriture();
+void lecture();
+void ecriture(Graphe graphe);
 vector<int> decoupeChaine(string chaine, char delimiteur);
 
 #endif

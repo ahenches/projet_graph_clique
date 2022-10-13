@@ -54,13 +54,20 @@ void lectureFichierBDD(string nomFichier)
 }
 
 
-void lecture(string nomFichier)
+void lecture()
 {
     int nbSommet, sommetSource, sommetDest, indice;
     bool oriente;
     string ligneAvantDecoupe, tmp;
     vector<int> ligneDecoupee;
-    ifstream fichier(nomFichier.c_str());  //Ouverture en lecture
+    string nomFichier, cheminFichier;
+    
+    cheminFichier = "./fichiers/";
+    cout << "Entrez le nom du fichier (avec l'extension) que vous voulez lire : " << endl;
+    cin >> nomFichier;
+
+    cheminFichier = cheminFichier + nomFichier;
+    ifstream fichier(cheminFichier.c_str());  //Ouverture en lecture
 
     if(fichier)
     {
@@ -86,7 +93,6 @@ void lecture(string nomFichier)
                 graphe.ajouterArc(sommetSource,sommetDest);
             }
         }
-
         cout << graphe.print();
     }
     else // Probleme ouverture du fichier
@@ -95,9 +101,49 @@ void lecture(string nomFichier)
     }
 }
 
-void ecriture()
+void ecriture(Graphe graphe)
 {
-    
+    string nomFichier, cheminFichier;
+    vector<Sommet> sommetsGraphe, listeAdjSommet;
+    Sommet sommetSource, sommetDest;
+    int nbSommet, nbVoisin, indiceSommet, indiceVoisin;
+
+    cheminFichier = "./fichiers/";
+    cout << "Entrez le nom du fichier pour stocké le graphe : " << endl;
+    cin >> nomFichier;
+
+    cheminFichier = cheminFichier + nomFichier + ".txt";
+    ofstream fichier(cheminFichier.c_str()); // Ouverture en ecriture
+
+    if(fichier)
+    {
+        //Ecriture nbSommet et oriente ou non
+        fichier << graphe.getNbSommet() << endl;
+        fichier << graphe.getEstOriente() << endl;
+
+        //Ecriture des listes d adjacence
+        sommetsGraphe = graphe.getSommets();
+        nbSommet = graphe.getNbSommet();
+        for (indiceSommet = 0; indiceSommet < nbSommet; indiceSommet++)
+        {
+            sommetSource = sommetsGraphe[indiceSommet];
+            nbVoisin =  static_cast<int>(sommetSource.getListeAdj().size());
+            if(nbVoisin > 0 ) //Le sommet a au moins 1 voisin
+            {
+                fichier << sommetSource.getNum() << " ";
+                listeAdjSommet = sommetSource.getListeAdj();
+                for(indiceVoisin = 0 ; indiceVoisin < nbVoisin; indiceVoisin++)
+                {
+                    fichier << listeAdjSommet[indiceVoisin].getNum() << " ";
+                }
+                fichier << endl;
+            }
+        }
+    }
+    else //Probleme ouverture du fichier
+    {
+        cout << "ERREUR: Impossible d'ouvrir le fichier en ecriture" << endl;
+    }
 }
 
 vector<int> decoupeChaine(string chaine, char delimiteur)

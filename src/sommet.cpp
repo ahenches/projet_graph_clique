@@ -19,6 +19,16 @@ void Sommet::ajouterVoisin(Sommet &voisin)
     // cout << this->listeAdj.size() << endl;
 }
 
+int Sommet::getNum()
+{
+    return num;
+}
+
+vector<Sommet> Sommet::getListeAdj()
+{
+    return listeAdj;
+}
+
 string Sommet::print()
 {
     string printString("");

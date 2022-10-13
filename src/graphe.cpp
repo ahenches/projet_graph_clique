@@ -88,3 +88,18 @@ void Graphe::ajouterArete(int s1Num, int s2Num)
     ajouterArc(s1Num, s2Num);
     ajouterArc(s2Num, s1Num);
 }
+
+int Graphe::getNbSommet()
+{
+    return nbSommet;
+}
+
+bool Graphe::getEstOriente()
+{
+    return estOriente;
+}
+    
+vector<Sommet> Graphe::getSommets()
+{
+    return sommets;
+}

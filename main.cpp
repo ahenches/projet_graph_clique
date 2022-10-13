@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    /*
+    
     Graphe g(true, 3);
     cout << g.print();
     g.ajouterArete(0, 1);
@@ -17,13 +17,14 @@ int main()
     cout << g.print();
     cout << "Hello World" << endl;
     // cout << "main function\n";
-    */
-   
+    
+    ecriture(g);
+    lecture ();
     //Mon test
     //string fichier("./fichiers/facebook_combined.txt");
     //string fichier("./fichiers/lastfm_asia_target.csv");
-    string fichier("./fichiers/graphe1.txt");
-    lecture(fichier);
+    //string fichier("./fichiers/graphe1.txt");
+    //lecture(fichier);
 
     return 0;
 }

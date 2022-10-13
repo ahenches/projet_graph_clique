@@ -16,6 +16,8 @@ class Sommet {
     Sommet();
     Sommet(int numero);
     void ajouterVoisin(Sommet &s);
+    int getNum();
+    vector<Sommet>getListeAdj();
     string print();
 };
 

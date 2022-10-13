@@ -27,6 +27,9 @@ class Graphe {
     string print();
     void ajouterArc(int source, int destination);
     void ajouterArete(int s1, int s2);
+    int getNbSommet();
+    bool getEstOriente();
+    vector<Sommet> getSommets();
 
     
 };
