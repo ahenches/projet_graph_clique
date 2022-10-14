@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector> //Ne pas oublier !
+#include <set> //Ne pas oublier !
 #include <string>
 
 using namespace std;
@@ -10,14 +10,14 @@ using namespace std;
 class Sommet {
     private:
     int num;
-    vector<Sommet> listeAdj;
+    set<Sommet> listeAdj;
     
     public:
     Sommet();
     Sommet(int numero);
     void ajouterVoisin(Sommet &s);
     int getNum();
-    vector<Sommet>getListeAdj();
+    set<Sommet>getListeAdj();
     string print();
 };
 

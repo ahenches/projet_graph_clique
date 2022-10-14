@@ -15,7 +15,7 @@ Sommet::Sommet(int numero)
 
 void Sommet::ajouterVoisin(Sommet &voisin)
 {
-    this->listeAdj.push_back(voisin);
+    //this->listeAdj.insert(voisin);
     // cout << this->listeAdj.size() << endl;
 }
 
@@ -24,7 +24,7 @@ int Sommet::getNum()
     return num;
 }
 
-vector<Sommet> Sommet::getListeAdj()
+set<Sommet> Sommet::getListeAdj()
 {
     return listeAdj;
 }

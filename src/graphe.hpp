@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <vector>
 #include <ctime>
 
 #include "./sommet.hpp"

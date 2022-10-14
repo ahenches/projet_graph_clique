@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <set>
 #include "./graphe.hpp"
 
 using namespace std;

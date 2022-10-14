@@ -5,7 +5,7 @@ void lectureFichierBDD(string nomFichier)
     int nbSommet, sommetSource, sommetDest;
     bool oriente;
     string ligneAvantDecoupe;
-    vector<int> ligneDecoupee;
+    vector <int> ligneDecoupee;
     ifstream fichier(nomFichier.c_str());  //Ouverture en lecture
 
     if(fichier)
@@ -59,7 +59,7 @@ void lecture()
     int nbSommet, sommetSource, sommetDest, indice;
     bool oriente;
     string ligneAvantDecoupe, tmp;
-    vector<int> ligneDecoupee;
+    vector <int> ligneDecoupee;
     string nomFichier, cheminFichier;
     
     cheminFichier = "./fichiers/";
@@ -104,9 +104,10 @@ void lecture()
 void ecriture(Graphe graphe)
 {
     string nomFichier, cheminFichier;
-    vector<Sommet> sommetsGraphe, listeAdjSommet;
+    vector<Sommet> sommetsGraphe;
+    set<Sommet>listeAdjSommet;
     Sommet sommetSource, sommetDest;
-    int nbSommet, nbVoisin, indiceSommet, indiceVoisin;
+    int  nbVoisin;
 
     cheminFichier = "./fichiers/";
     cout << "Entrez le nom du fichier pour stocké le graphe : " << endl;
@@ -123,18 +124,17 @@ void ecriture(Graphe graphe)
 
         //Ecriture des listes d adjacence
         sommetsGraphe = graphe.getSommets();
-        nbSommet = graphe.getNbSommet();
-        for (indiceSommet = 0; indiceSommet < nbSommet; indiceSommet++)
+        for (auto sommetCourant : sommetsGraphe)
         {
-            sommetSource = sommetsGraphe[indiceSommet];
+            sommetSource = sommetCourant;
             nbVoisin =  static_cast<int>(sommetSource.getListeAdj().size());
             if(nbVoisin > 0 ) //Le sommet a au moins 1 voisin
             {
                 fichier << sommetSource.getNum() << " ";
                 listeAdjSommet = sommetSource.getListeAdj();
-                for(indiceVoisin = 0 ; indiceVoisin < nbVoisin; indiceVoisin++)
+                for(auto voisinCourant : listeAdjSommet)
                 {
-                    fichier << listeAdjSommet[indiceVoisin].getNum() << " ";
+                    fichier << voisinCourant.getNum() << " ";
                 }
                 fichier << endl;
             }
