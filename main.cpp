@@ -15,8 +15,6 @@ int main()
     cout << g.print();
     g.ajouterArc(0, 2);
     cout << g.print();
-    cout << "Hello World" << endl;
-    // cout << "main function\n";
     
     ecriture(g);
     lecture ();

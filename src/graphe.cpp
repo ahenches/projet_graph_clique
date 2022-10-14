@@ -1,8 +1,12 @@
 #include "graphe.hpp"
 
 /**
- * Graphe implementation
+ * Implémentation Graphe
  */
+
+/*
+    Construction Graphe
+*/
 
 Graphe::Graphe(bool oriente)
 {
@@ -43,17 +47,6 @@ void Graphe::genererArcsAleatoires(float prob)
     }
 }
 
-// /**
-//  * @param sommet
-//  */
-// void Graphe::rechercheSommet(Sommet sommet)
-// {
-
-// }
-
-/**
- * @param sommet
- */
 bool Graphe::ajouterSommet(int num)
 {
     Sommet s(num);
@@ -61,20 +54,6 @@ bool Graphe::ajouterSommet(int num)
     nbSommet++;
 
     return true;
-}
-
-string Graphe::print()
-{
-    string printString;
-    int i = 0;
-    cout << sommets.size() << endl;
-    for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
-    {
-        printString += to_string(i) + ":" + it->print() + "\n";
-        i++;
-    }
-    // cout << "'" << printString << "'" <<endl;
-    return printString;
 }
 
 void Graphe::ajouterArc(int sourceNum, int destinationNum)
@@ -88,6 +67,26 @@ void Graphe::ajouterArete(int s1Num, int s2Num)
     ajouterArc(s1Num, s2Num);
     ajouterArc(s2Num, s1Num);
 }
+
+/*
+    Affichage
+*/
+string Graphe::print()
+{
+    string printString;
+    int i = 0;
+    cout << sommets.size() << endl;
+    for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
+    {
+        printString += to_string(i) + ":" + it->print() + "\n";
+        i++;
+    }
+    // cout << "'" << printString << "'" <<endl;
+    return printString;
+}
+/*
+    Getter / Setter
+*/
 
 int Graphe::getNbSommet()
 {
