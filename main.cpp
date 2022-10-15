@@ -2,7 +2,8 @@
 
 # include "./src/graphe.hpp"
 # include "./src/sommet.hpp"
-#include "./src/LectureEcriture.hpp"
+#include "./src/lectureEcriture.hpp"
+#include "./src/statistique.hpp"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ int main()
     cout << g.print();
     g.ajouterArc(0, 2);
     cout << g.print();
+    compteCheminDistanceDeux(g);
     
     ecriture(g);
     lecture ();

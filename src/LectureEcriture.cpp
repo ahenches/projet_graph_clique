@@ -1,4 +1,4 @@
-#include "LectureEcriture.hpp"
+#include "lectureEcriture.hpp"
 
 void lectureFichierBDD(string nomFichier)
 {
@@ -44,8 +44,7 @@ void lectureFichierBDD(string nomFichier)
                 graphe.ajouterArete(sommetSource,sommetDest);
             }
         }
-
-        cout << graphe.print();
+        cout << "Lecture du fichier" << nomFichier << "effectuée" << endl;
     }
     else // Probleme ouverture du fichier
     {
@@ -93,7 +92,7 @@ void lecture()
                 graphe.ajouterArc(sommetSource,sommetDest);
             }
         }
-        cout << graphe.print();
+        cout << "Lecture du fichier "<< cheminFichier << " effectuée" << endl;
     }
     else // Probleme ouverture du fichier
     {
@@ -139,6 +138,8 @@ void ecriture(Graphe graphe)
                 fichier << endl;
             }
         }
+        cout << "Le graphe suivant a été enregistré dans le fichier " << cheminFichier << endl;
+        cout << graphe.print();
     }
     else //Probleme ouverture du fichier
     {
