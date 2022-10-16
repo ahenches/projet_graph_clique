@@ -12,7 +12,7 @@ main.out : lectureEcriture.o histogram.o statistique.o main.cpp src/graphe.cpp s
 # 			$(CC) -Wall -o sommet.o -c src/sommet.cpp -O
 histogram.o : src/histogram.cpp
 			$(CC) $(FLAGS) -o $@ $(LIB)  -c src/histogram.cpp -O
-statistique.o : statistique.cpp
-			$(CC) $(FLAGS) -o $@ $(LIB)  -c statistique.cpp -O
+statistique.o : src/statistique.cpp
+			$(CC) $(FLAGS) -o $@ $(LIB)  -c src/statistique.cpp -O
 lectureEcriture.o : src/LectureEcriture.cpp
 			$(CC) $(FLAGS) -o $@ -c src/LectureEcriture.cpp -O
