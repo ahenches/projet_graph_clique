@@ -2,15 +2,13 @@
 #include <set> //Ne pas oublier !
 #include <string>
 
-using namespace std;
-
 #ifndef _SOMMET_H
 #define _SOMMET_H
 
 class Sommet {
     private:
     int num;
-    set<Sommet> listeAdj;
+    std::set<Sommet> listeAdj;
     
     public:
     Sommet();
@@ -18,8 +16,9 @@ class Sommet {
     bool operator<(const Sommet& rhs) const; // overload l'operateur d'ordre
     void ajouterVoisin(Sommet &s);
     int getNum();
-    set<Sommet>getListeAdj();
-    string print();
+    std::set<Sommet> getListeAdj();
+    
+    std::string print();
 
     
 };

@@ -4,6 +4,9 @@
  * Implémentation Graphe
  */
 
+
+using namespace std;
+
 /*
     Construction Graphe
 */
@@ -32,14 +35,14 @@ void Graphe::genererArcsAleatoires(float prob)
     {
         for(long unsigned int j = 0; j < i; j++)
         {
-            if (((float)rand() / (float)RAND_MAX) > prob) 
+            if (((float)rand() / (float)RAND_MAX) < prob) 
             {
                 ajouterArc(i, j);
             }
         }
         for(long unsigned int j = i+1; j < sommets.size(); j++)
         {
-            if (((float)rand() / (float)RAND_MAX) > prob) 
+            if (((float)rand() / (float)RAND_MAX) < prob) 
             {
                 ajouterArc(i, j);
             }
@@ -75,15 +78,39 @@ string Graphe::print()
 {
     string printString;
     int i = 0;
-    cout << sommets.size() << endl;
     for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
     {
         printString += to_string(i) + ":" + it->print() + "\n";
         i++;
     }
-    // cout << "'" << printString << "'" <<endl;
     return printString;
 }
+
+void coucou(vector<int> chien)
+{
+    for (int a : chien)
+    {
+        cout << a << endl;
+    }
+}
+
+
+/*
+    Calculs
+*/
+vector<int> Graphe::calculerDegres()
+{
+    vector<int> retDegres(nbSommet);
+    int degreSommet;
+    for(long unsigned int i = 0; i < sommets.size(); i++)
+    {
+        degreSommet = sommets[i].getListeAdj().size();
+        retDegres[degreSommet]++;
+    }
+    return retDegres;
+}
+
+
 /*
     Getter / Setter
 */
@@ -102,3 +129,4 @@ vector<Sommet> Graphe::getSommets()
 {
     return sommets;
 }
+

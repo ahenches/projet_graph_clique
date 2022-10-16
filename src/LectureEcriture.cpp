@@ -1,5 +1,7 @@
 #include "LectureEcriture.hpp"
 
+using namespace std;
+
 void lectureFichierBDD(string nomFichier)
 {
     int nbSommet, sommetSource, sommetDest;

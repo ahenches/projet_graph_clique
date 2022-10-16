@@ -1,5 +1,7 @@
 #include "sommet.hpp"
 
+using namespace std;
+
 /**
  * Sommet implementation
  */
@@ -21,7 +23,7 @@ bool Sommet::operator<(const Sommet& rhs) const
 void Sommet::ajouterVoisin(Sommet &voisin)
 {
     listeAdj.insert(voisin);
-    cout << this->listeAdj.size() << endl;
+    // cout << this->listeAdj.size() << endl;
 }
 
 
