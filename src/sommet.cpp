@@ -42,7 +42,7 @@ string Sommet::print()
     string printString("");
     for(auto it = listeAdj.begin() ; it != listeAdj.end() ; ++it)
     {   
-        printString += to_string(it->num) + "  ";  //On additionne toutes les notes
+        printString += to_string(it->num) + "  "; 
     }
     // cout << printString << endl;
     // cout << this->listeAdj.size() << endl;

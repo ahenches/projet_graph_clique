@@ -80,20 +80,11 @@ string Graphe::print()
     int i = 0;
     for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
     {
-        printString += to_string(i) + ":" + it->print() + "\n";
+        printString += to_string(it->getNum()) + ":" + it->print() + "\n";
         i++;
     }
     return printString;
 }
-
-void coucou(vector<int> chien)
-{
-    for (int a : chien)
-    {
-        cout << a << endl;
-    }
-}
-
 
 /*
     Calculs
