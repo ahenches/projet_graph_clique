@@ -27,13 +27,14 @@ class Graphe {
     void ajouterArete(int s1, int s2);
 
     std::string print();
-    void coucou(std::vector<int> chien);
-
+    
     std::vector<int> calculerDegres();
 
     int getNbSommet();
     bool getEstOriente();
-    std::vector<Sommet> getSommets();
+    std::vector<Sommet>& getSommets();
+    Sommet& getSommet(int i);
+    void test();
 
     
 };

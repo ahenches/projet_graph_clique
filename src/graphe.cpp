@@ -77,22 +77,14 @@ void Graphe::ajouterArete(int s1Num, int s2Num)
 string Graphe::print()
 {
     string printString;
-    int i = 0;
     for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
     {
-        printString += to_string(i) + ":" + it->print() + "\n";
-        i++;
+        printString += it->print() + "\n";
     }
     return printString;
 }
 
-void coucou(vector<int> chien)
-{
-    for (int a : chien)
-    {
-        cout << a << endl;
-    }
-}
+
 
 
 /*
@@ -125,8 +117,20 @@ bool Graphe::getEstOriente()
     return estOriente;
 }
     
-vector<Sommet> Graphe::getSommets()
+vector<Sommet>& Graphe::getSommets()
 {
     return sommets;
 }
 
+Sommet& Graphe::getSommet(int num)
+{
+    return sommets[num];
+}
+
+void Graphe::test()
+{
+    cout << sommets[0].getNum() << endl;
+    sommets[0].setNum(5);
+    cout << sommets[0].getNum() << endl;
+    
+}
