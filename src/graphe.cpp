@@ -77,15 +77,12 @@ void Graphe::ajouterArete(int s1Num, int s2Num)
 string Graphe::print()
 {
     string printString;
-    for(auto it = sommets.begin() ; it != sommets.end() ; ++it)
+    for(Sommet sommet : sommets)
     {
-        printString += it->print() + "\n";
+        printString += sommet.print() + "\n";
     }
     return printString;
 }
-
-
-
 
 /*
     Calculs

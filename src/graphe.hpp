@@ -27,7 +27,6 @@ class Graphe {
     void ajouterArete(int s1, int s2);
 
     std::string print();
-    
     std::vector<int> calculerDegres();
 
     int getNbSommet();

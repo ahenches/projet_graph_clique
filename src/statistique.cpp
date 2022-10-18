@@ -2,39 +2,35 @@
 
 void compteCheminDistanceDeux(Graphe graphe)
 {
-    vector<Sommet> sommets = graphe.getSommets();
-    Sommet sommmetDepart, sommetMilieu;
-    set<Sommet> voisinsSomDepart, voisinsSomMilieu, listeSommetsArrivee;
+    vector<Sommet> sommetsGraphe = graphe.getSommets();
+    Sommet sommetDepart, sommetMilieu;
+    set<Sommet> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
     int nbCheminLongDeux;
 
     nbCheminLongDeux = 0;
 
-    for (auto s : sommets)
+    for (auto sommetCourant : sommetsGraphe)
     {
-        sommmetDepart = s;
-        voisinsSomDepart = sommmetDepart.getListeAdj();
+        sommetDepart = sommetCourant;
+        listeAdjSomDepart = sommetDepart.getListeAdj();
 
-        cout << "Voisin depart "  << sommmetDepart.getNum() << " : ";
-            print(voisinsSomDepart);
-
-        for(auto voisinDepart : voisinsSomDepart)
+        for(Sommet voisinCourant : listeAdjSomDepart)
         {
-            voisinsSomMilieu = voisinDepart.getListeAdj();
-            
-            
-            cout <<endl<< "\t voisins  milieu " << voisinDepart.getNum() <<" : " ;
-            print(voisinDepart.getListeAdj());
-            
-            set_difference(voisinsSomMilieu.begin(), voisinsSomMilieu.end(),
-                            voisinsSomDepart.begin(),voisinsSomDepart.end(),
+            sommetMilieu = voisinCourant;
+            listeAdjSomMilieu = sommetMilieu.getListeAdj();
+                        
+            set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
+                            listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                             inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
            
-            
-            cout <<endl<< "\tliste arrivee : ";
             print(listeSommetsArrivee);
             cout << endl;
             nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
-            
+            if (listeSommetsArrivee.find(sommetDepart) != listeSommetsArrivee.end())
+            {
+                nbCheminLongDeux -= 1;
+            }
+            listeSommetsArrivee.clear();
         }
     }
     cout << "Le nombre de chemin de longueur 2 du graphe est : " << nbCheminLongDeux << endl;
