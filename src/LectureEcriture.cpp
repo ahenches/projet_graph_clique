@@ -106,7 +106,7 @@ void ecriture(Graphe graphe)
 {
     string nomFichier, cheminFichier;
     vector<Sommet> sommetsGraphe;
-    set<Sommet *, int>listeAdjSommet;
+    set<int>listeAdjSommet;
     Sommet sommetSource, sommetDest;
     int  nbVoisin;
 
@@ -135,7 +135,7 @@ void ecriture(Graphe graphe)
                 listeAdjSommet = sommetSource.getListeAdj();
                 for(auto voisinCourant : listeAdjSommet)
                 {
-                    fichier << voisinCourant->getNum() << " ";
+                    fichier << voisinCourant << " ";
                 }
                 fichier << endl;
             }
