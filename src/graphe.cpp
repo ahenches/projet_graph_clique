@@ -61,7 +61,7 @@ bool Graphe::ajouterSommet(int num)
 
 void Graphe::ajouterArc(int sourceNum, int destinationNum)
 {
-    sommets[sourceNum].ajouterVoisin(sommets[destinationNum]);
+    sommets[sourceNum].ajouterVoisin(destinationNum);
     // potentielle verif    
 }
 
@@ -129,5 +129,4 @@ void Graphe::test()
     cout << sommets[0].getNum() << endl;
     sommets[0].setNum(5);
     cout << sommets[0].getNum() << endl;
-    
 }

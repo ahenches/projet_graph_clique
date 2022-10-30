@@ -3,30 +3,25 @@
 void compteCheminDistanceDeux(Graphe graphe)
 {
     vector<Sommet> sommetsGraphe = graphe.getSommets();
-    Sommet sommetDepart, sommetMilieu;
-    set<Sommet> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
+    int sommetMilieu;
+    set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
     int nbCheminLongDeux;
 
     nbCheminLongDeux = 0;
 
-    for (auto sommetCourant : sommetsGraphe)
+    for (Sommet sommetDepart : sommetsGraphe)
     {
-        sommetDepart = sommetCourant;
-        listeAdjSomDepart = sommetDepart.getListeAdj();
-
-        for(Sommet voisinCourant : listeAdjSomDepart)
+        for(int voisinCourant : sommetDepart.getListeAdj())
         {
-            sommetMilieu = voisinCourant;
-            listeAdjSomMilieu = sommetMilieu.getListeAdj();
+            listeAdjSomMilieu = graphe.getSommet(voisinCourant).getListeAdj();
                         
             set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
                             listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                             inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
            
-            print(listeSommetsArrivee);
             cout << endl;
             nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
-            if (listeSommetsArrivee.find(sommetDepart) != listeSommetsArrivee.end())
+            if (listeSommetsArrivee.find(sommetDepart.getNum()) != listeSommetsArrivee.end())
             {
                 nbCheminLongDeux -= 1;
             }
@@ -34,14 +29,4 @@ void compteCheminDistanceDeux(Graphe graphe)
         }
     }
     cout << "Le nombre de chemin de longueur 2 du graphe est : " << nbCheminLongDeux << endl;
-}
-
-void print (set<Sommet> s)
-{
-    cout << "{";
-    for(auto i : s)
-    {
-        cout << i.getNum() << " ";
-    }
-    cout << "}";
 }

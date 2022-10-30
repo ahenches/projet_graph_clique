@@ -1,23 +1,32 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
-  
-// The vect here is a copy of vect in main()
-void func(vector<double> vector) { vector.push_back(30); }
-  
+
+class A {
+    private:
+    int num;
+    public:
+    A(int number)
+    {
+        num = number;
+    }
+    void setNum(int number)
+    {
+        num = number;
+    }
+    int getNum()
+    {
+        return num;
+    }
+
+
+};
+
 int main()
 {
-    vector<double> vect;
-    vect.push_back(10);
-    vect.push_back(20);
-  
-    func(vect);
-  
-    // vect remains unchanged after function
-    // call
-    for (int i = 0; i < vect.size(); i++)
-        cout << vect[i] << " ";
-  
+    A a(5);
+    cout << a.getNum() << endl;
+    a.setNum(9);
+    cout << a.getNum() << endl;
     return 0;
 }

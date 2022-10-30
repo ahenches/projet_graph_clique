@@ -33,16 +33,20 @@ set palette defined ( 0 '#1B9E77',\
 #==============================================================================
 # TERMINAL
 #==============================================================================
-set termoption enhanced
-set terminal GNUTERM size 324,200
+set terminal pdf size 4.5in,2.77778in enhanced rounded 
+set encoding utf8
+#==============================================================================
+# OUTPUT
+#==============================================================================
+set output 'example-boxes-ticklabels.pdf'
 set encoding utf8
 
 #==============================================================================
 # SETUP COMMANDS
 #==============================================================================
-set yrange [0.000000:5.000000]
+set yrange [0.000000:50.000000]
 
-set ylabel 'degrés' enhanced textcolor '#404040'
+set ylabel 'Age' enhanced textcolor '#404040'
 
 set border 3 front linetype 1 linewidth 2 linecolor '#404040'
 unset grid
@@ -61,7 +65,7 @@ unset ztics
 unset mztics
 unset rtics
 unset mrtics
-set key inside left top opaque vertical Left noinvert reverse width 0 height 1 samplen 4 spacing 1 enhanced textcolor '#404040' font ',10' nobox maxrows auto maxcols auto
+set key inside left top opaque vertical Left noinvert reverse width 0 height 1 samplen 4 spacing 1 enhanced textcolor '#404040' nobox maxrows auto maxcols auto
 set boxwidth 0.75 relative
 set datafile missing "?"
 #==============================================================================
@@ -75,3 +79,4 @@ plot \
     'plot0.dat' index 0 using 0:2:3:xtic(1) notitle with boxes linestyle 1 linewidth 2 fillcolor 'pink' fillstyle solid 0.5 border
 
 
+set output

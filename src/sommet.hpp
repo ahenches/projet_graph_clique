@@ -1,27 +1,38 @@
-#include <iostream>
-#include <set> //Ne pas oublier !
-#include <string>
-
 #ifndef _SOMMET_H
 #define _SOMMET_H
 
+#include <iostream>
+#include <set> //Ne pas oublier !
+#include <string>
+#include <vector>
+
+
+
 class Sommet {
     private:
-    int num;
-    std::set<Sommet> listeAdj;
     
+    std::set<int> listeAdj;
+    int num;
+
     public:
+    
     Sommet();
     Sommet(int numero);
-    bool operator<(const Sommet& rhs) const; // overload l'operateur d'ordre
-    void ajouterVoisin(Sommet &s);
-    int getNum();
-    std::set<Sommet> getListeAdj();
+
+    // bool operator<(const Sommet& rhs) const; // overload l'operateur d'ordre
+
+    void ajouterVoisin(int voisin);
+    void setNum(int numero);
+    const int getNum();
+    // std::vector<Sommet>& getListeAdj();
+    std::set<int>& getListeAdj();
     
     std::string print();
 
-    
 };
+
+
+
 
 
 

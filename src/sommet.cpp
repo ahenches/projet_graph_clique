@@ -23,9 +23,9 @@ Sommet::Sommet(int numero)
 //     return num < rhs.num;
 // };
 
-void Sommet::ajouterVoisin(Sommet& voisin)
+void Sommet::ajouterVoisin(int voisin)
 {
-    listeAdj.insert(&voisin);
+    listeAdj.insert(voisin);
 
     // cout << "ajouterVoisin : " << print() << endl;
     // for(Sommet* voisin : getListeAdj())
@@ -62,7 +62,7 @@ const int Sommet::getNum()
     return num;
 }
 
-set<Sommet *, int>& Sommet::getListeAdj()
+set<int>& Sommet::getListeAdj()
 {
     return listeAdj;
 }
@@ -72,7 +72,7 @@ string Sommet::print()
     string printString(to_string(num)+": ");
     for(auto voisin: listeAdj)
     {
-        printString += to_string(voisin->num) + "  ";  //On additionne toutes les notes
+        printString += to_string(voisin) + "  ";  //On additionne toutes les notes
     }
     return printString;
 }
