@@ -18,6 +18,7 @@ class Graphe {
     bool estOriente;
 
     public: 
+    int nbEdge;
     std::vector<Sommet> sommets;
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);

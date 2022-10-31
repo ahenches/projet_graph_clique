@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void lectureFichierBDD(string nomFichier)
+Graphe lectureFichierBDD(string nomFichier)
 {
     int nbSommet, sommetSource, sommetDest;
     bool oriente;
@@ -35,27 +35,28 @@ void lectureFichierBDD(string nomFichier)
         {
            ligneDecoupee = decoupeChaine(ligneAvantDecoupe,' ');
            
+           if(ligneDecoupee[1] < nbSommet){
             sommetSource = ligneDecoupee[0];
             sommetDest = ligneDecoupee[1];
             //cout << sommetSource << " destination : " << sommetDest << endl;
-        
-            if(oriente){
-                graphe.ajouterArc(sommetSource,sommetDest);
-            }
-            else{
-                graphe.ajouterArete(sommetSource,sommetDest);
-            }
+           // if(oriente)
+            graphe.ajouterArc(sommetSource,sommetDest);
+            //else
+              //  graphe.ajouterArete(sommetSource,sommetDest);
+           }
         }
-        cout << "Lecture du fichier" << nomFichier << "effectuée" << endl;
+        cout << "Lecture du fichier " << nomFichier << " effectuée" << endl;
+        return graphe;
     }
     else // Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
+        return NULL;
     }
 }
 
 
-void lecture()
+Graphe lecture()
 {
     int nbSommet, sommetSource, sommetDest, indice;
     bool oriente;
@@ -95,10 +96,12 @@ void lecture()
             }
         }
         cout << "Lecture du fichier "<< cheminFichier << " effectuée" << endl;
+        return graphe;
     }
     else // Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
+        return NULL;
     }
 }
 

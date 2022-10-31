@@ -19,7 +19,7 @@ void compteCheminDistanceDeux(Graphe graphe)
                             listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                             inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
            
-            cout << endl;
+           // cout << endl;
             nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
             if (listeSommetsArrivee.find(sommetDepart.getNum()) != listeSommetsArrivee.end())
             {

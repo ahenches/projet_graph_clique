@@ -26,6 +26,7 @@ Graphe::Graphe(bool oriente, int nSommet)
         sommets[i] = s;
     }
     nbSommet = nSommet;
+    nbEdge =0;
 }
 
 void Graphe::genererArcsAleatoires(float prob)
@@ -62,6 +63,8 @@ bool Graphe::ajouterSommet(int num)
 void Graphe::ajouterArc(int sourceNum, int destinationNum)
 {
     sommets[sourceNum].ajouterVoisin(destinationNum);
+    cout << sourceNum << " : "<< destinationNum << endl;
+    nbEdge++;
     // potentielle verif    
 }
 

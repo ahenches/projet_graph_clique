@@ -9,8 +9,8 @@
 #include <set>
 #include "./graphe.hpp"
 
-void lectureFichierBDD(std::string nomFichier);
-void lecture();
+Graphe lectureFichierBDD(std::string nomFichier);
+Graphe lecture();
 void ecriture(Graphe graphe);
 std::vector<int> decoupeChaine(std::string chaine, char delimiteur);
 
