@@ -2,50 +2,48 @@
 
 using namespace std;
 
-Graphe lectureFichierBDD(string nomFichier)
+Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCSV)
 {
     int nbSommet, sommetSource, sommetDest;
     bool oriente;
     string ligneAvantDecoupe;
     vector <int> ligneDecoupee;
-    ifstream fichier(nomFichier.c_str());  //Ouverture en lecture
+    ifstream fichier(nomFichier.c_str());  //Ouverture en lecture du fichier
 
     if(fichier)
     {
         //Nombre de sommets et oriente ou non
-        cout << "Entrez le nombre de sommets de votre graphe : " << endl;
+        cout << "Fichier en cours de lecture : " << nomFichier << endl;
+        cout << "\tEntrez le nombre de sommets de votre graphe : " << endl;
         cin >> nbSommet; 
 
-        cout << "Votre graphe est il orienté ? " << endl << "Tapez 0 pour non ou 1 pour oui" << endl;
+        cout << "\tVotre graphe est il orienté ? " << endl << "\tTapez 0 pour non ou 1 pour oui" << endl;
         cin >> oriente;
 
         if(oriente){
-            cout << "Votre graphe a " << nbSommet << " sommet et est orienté" << endl; 
+            cout << "\tVotre graphe a " << nbSommet << " sommet et est orienté" << endl; 
         }
         else {
-            cout << "Votre graphe a " << nbSommet << " sommet et est non-orienté" << endl; 
+            cout << "\tVotre graphe a " << nbSommet << " sommet et est non-orienté" << endl; 
         }
 
         //Création graphe 
         Graphe graphe(oriente,nbSommet);
 
-        //Ajout arcs et aretes
-        
+        //Ajout arcs 
+        if (estUnfichierCSV) // Premiere ligne a passer
+        {
+            getline(fichier, ligneAvantDecoupe);
+        }
         while(getline(fichier, ligneAvantDecoupe)) 
         {
-           ligneDecoupee = decoupeChaine(ligneAvantDecoupe,' ');
+           ligneDecoupee = decoupeChaine(ligneAvantDecoupe,separateur);
            
-           if(ligneDecoupee[1] < nbSommet){
             sommetSource = ligneDecoupee[0];
             sommetDest = ligneDecoupee[1];
-            //cout << sommetSource << " destination : " << sommetDest << endl;
-           // if(oriente)
             graphe.ajouterArc(sommetSource,sommetDest);
-            //else
-              //  graphe.ajouterArete(sommetSource,sommetDest);
-           }
         }
-        cout << "Lecture du fichier " << nomFichier << " effectuée" << endl;
+        cout << "\tLecture du fichier " << nomFichier << " terminée" << endl;
         return graphe;
     }
     else // Probleme ouverture du fichier
@@ -55,24 +53,27 @@ Graphe lectureFichierBDD(string nomFichier)
     }
 }
 
-
-Graphe lecture()
+Graphe lecture(string nomFichier)
 {
     int nbSommet, sommetSource, sommetDest, indice;
     bool oriente;
     string ligneAvantDecoupe, tmp;
     vector <int> ligneDecoupee;
-    string nomFichier, cheminFichier;
+    string cheminFichier;
     
     cheminFichier = "./fichiers/";
-    cout << "Entrez le nom du fichier (avec l'extension) que vous voulez lire : " << endl;
-    cin >> nomFichier;
+    if (nomFichier == " ")
+    {
+        cout << "\tEntrez le nom du fichier (avec l'extension) que vous voulez lire : " << endl;
+        cin >> nomFichier;
+    }
 
     cheminFichier = cheminFichier + nomFichier;
     ifstream fichier(cheminFichier.c_str());  //Ouverture en lecture
 
     if(fichier)
     {
+        cout << "\tFichier en cours de lecture : " << nomFichier<< endl;
         //Lecture des 2 premieres lignes pour le nombre de sommets et orienté ou non
         getline(fichier,tmp);
         nbSommet = stoi(tmp);
@@ -95,7 +96,7 @@ Graphe lecture()
                 graphe.ajouterArc(sommetSource,sommetDest);
             }
         }
-        cout << "Lecture du fichier "<< cheminFichier << " effectuée" << endl;
+        cout << "\tLecture du fichier "<< cheminFichier << " terminée" << endl;
         return graphe;
     }
     else // Probleme ouverture du fichier
@@ -114,7 +115,7 @@ void ecriture(Graphe graphe)
     int  nbVoisin;
 
     cheminFichier = "./fichiers/";
-    cout << "Entrez le nom du fichier pour stocké le graphe : " << endl;
+    cout << "\tEntrez le nom du fichier pour stocké le graphe : " << endl;
     cin >> nomFichier;
 
     cheminFichier = cheminFichier + nomFichier + ".txt";
@@ -143,8 +144,7 @@ void ecriture(Graphe graphe)
                 fichier << endl;
             }
         }
-        cout << "Le graphe suivant a été enregistré dans le fichier " << cheminFichier << endl;
-        cout << graphe.print();
+        cout << "\tLe graphe a été enregistré dans le fichier " << cheminFichier << endl;
     }
     else //Probleme ouverture du fichier
     {

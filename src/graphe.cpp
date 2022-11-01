@@ -15,6 +15,7 @@ Graphe::Graphe(bool oriente)
 {
     estOriente = oriente;
 }
+
 Graphe::Graphe(bool oriente, int nSommet)
 {
     estOriente = oriente;
@@ -26,12 +27,16 @@ Graphe::Graphe(bool oriente, int nSommet)
         sommets[i] = s;
     }
     nbSommet = nSommet;
-    nbEdge =0;
+    nbArcs =0;
 }
 
-void Graphe::genererArcsAleatoires(float prob)
+void Graphe::genererArcsAleatoires()
 {
+    float prob;
     srand(time(nullptr));
+    prob = (float)rand() / (float)RAND_MAX;
+    cout << "\tLa probabilité des arcs est : " << prob << endl;
+
     for(long unsigned int i = 0; i < sommets.size(); i++)
     {
         for(long unsigned int j = 0; j < i; j++)
@@ -63,8 +68,7 @@ bool Graphe::ajouterSommet(int num)
 void Graphe::ajouterArc(int sourceNum, int destinationNum)
 {
     sommets[sourceNum].ajouterVoisin(destinationNum);
-    cout << sourceNum << " : "<< destinationNum << endl;
-    nbEdge++;
+    nbArcs++;
     // potentielle verif    
 }
 
@@ -102,6 +106,36 @@ vector<int> Graphe::calculerDegres()
     return retDegres;
 }
 
+void Graphe::compteCheminDistanceDeux()
+{
+    vector<Sommet> sommetsGraphe = getSommets();
+    int sommetMilieu;
+    set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
+    int nbCheminLongDeux;
+
+    nbCheminLongDeux = 0;
+
+    for (Sommet sommetDepart : sommetsGraphe)
+    {
+        for(int voisinCourant : sommetDepart.getListeAdj())
+        {
+            listeAdjSomMilieu = getSommet(voisinCourant).getListeAdj();
+                        
+            set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
+                            listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
+                            inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
+           
+           // cout << endl;
+            nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
+            if (listeSommetsArrivee.find(sommetDepart.getNum()) != listeSommetsArrivee.end())
+            {
+                nbCheminLongDeux -= 1;
+            }
+            listeSommetsArrivee.clear();
+        }
+    }
+    cout << "Le nombre de chemin de longueur 2 du graphe est : " << nbCheminLongDeux << endl;
+}
 
 /*
     Getter / Setter
@@ -117,6 +151,11 @@ bool Graphe::getEstOriente()
     return estOriente;
 }
     
+int Graphe::getNbArcs()
+{
+    return nbArcs;
+}
+
 vector<Sommet>& Graphe::getSommets()
 {
     return sommets;
@@ -133,3 +172,4 @@ void Graphe::test()
     sommets[0].setNum(5);
     cout << sommets[0].getNum() << endl;
 }
+
