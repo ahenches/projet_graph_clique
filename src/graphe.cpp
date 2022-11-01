@@ -43,14 +43,28 @@ void Graphe::genererArcsAleatoires()
         {
             if (((float)rand() / (float)RAND_MAX) < prob) 
             {
-                ajouterArc(i, j);
+                if(estOriente)
+                {
+                    ajouterArc(i, j);
+                }
+                else 
+                {
+                    ajouterArete(i,j);
+                }
             }
         }
         for(long unsigned int j = i+1; j < sommets.size(); j++)
         {
             if (((float)rand() / (float)RAND_MAX) < prob) 
             {
-                ajouterArc(i, j);
+                if(estOriente)
+                {
+                    ajouterArc(i, j);
+                }
+                else 
+                {
+                    ajouterArete(i,j);
+                }
             }
         }
     }
@@ -68,7 +82,7 @@ bool Graphe::ajouterSommet(int num)
 void Graphe::ajouterArc(int sourceNum, int destinationNum)
 {
     sommets[sourceNum].ajouterVoisin(destinationNum);
-    nbArcs++;
+    nbArcs+=  1;
     // potentielle verif    
 }
 
@@ -106,10 +120,24 @@ vector<int> Graphe::calculerDegres()
     return retDegres;
 }
 
-void Graphe::compteCheminDistanceDeux()
+int Graphe::calculerDegreMax()
+{
+    int degreMax;
+    vector<int> degres;
+
+    degres = calculerDegres();
+    degreMax = (int)degres.size() - 1;
+
+    while(degres[degreMax] == 0 && degreMax >= 0 )
+    {
+        degreMax --;
+    }
+    return degreMax;
+}
+
+int Graphe::compteCheminDistanceDeux()
 {
     vector<Sommet> sommetsGraphe = getSommets();
-    int sommetMilieu;
     set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
     int nbCheminLongDeux;
 
@@ -125,7 +153,6 @@ void Graphe::compteCheminDistanceDeux()
                             listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                             inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
            
-           // cout << endl;
             nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
             if (listeSommetsArrivee.find(sommetDepart.getNum()) != listeSommetsArrivee.end())
             {
@@ -134,7 +161,7 @@ void Graphe::compteCheminDistanceDeux()
             listeSommetsArrivee.clear();
         }
     }
-    cout << "Le nombre de chemin de longueur 2 du graphe est : " << nbCheminLongDeux << endl;
+    return nbCheminLongDeux;
 }
 
 /*

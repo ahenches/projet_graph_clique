@@ -41,9 +41,15 @@ Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCS
            
             sommetSource = ligneDecoupee[0];
             sommetDest = ligneDecoupee[1];
-            graphe.ajouterArc(sommetSource,sommetDest);
+            if(oriente){
+                graphe.ajouterArc(sommetSource,sommetDest);
+            }
+            else 
+            {
+                graphe.ajouterArete(sommetSource,sommetDest);
+            }
         }
-        cout << "\tLecture du fichier " << nomFichier << " terminée" << endl;
+        cout << "\tLecture du fichier " << nomFichier << " terminée" << endl << endl;
         return graphe;
     }
     else // Probleme ouverture du fichier
@@ -96,7 +102,7 @@ Graphe lecture(string nomFichier)
                 graphe.ajouterArc(sommetSource,sommetDest);
             }
         }
-        cout << "\tLecture du fichier "<< cheminFichier << " terminée" << endl;
+        cout << "\tLecture du fichier "<< cheminFichier << " terminée" << endl << endl;
         return graphe;
     }
     else // Probleme ouverture du fichier

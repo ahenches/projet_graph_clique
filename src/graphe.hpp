@@ -34,7 +34,8 @@ class Graphe {
     std::string print();
     
     std::vector<int> calculerDegres();
-    void compteCheminDistanceDeux();
+    int calculerDegreMax();
+    int compteCheminDistanceDeux();
 
 
     int getNbSommet();
