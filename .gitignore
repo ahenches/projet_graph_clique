@@ -34,4 +34,5 @@
 
 # others
 *.pdf
+*.plt
 .vscode/
