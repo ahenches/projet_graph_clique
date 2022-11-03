@@ -40,9 +40,9 @@ set encoding utf8
 #==============================================================================
 # SETUP COMMANDS
 #==============================================================================
-set yrange [0.000000:111.000000]
+set yrange [0.000000:44.000000]
 
-set ylabel 'degrés Facebook' enhanced textcolor '#404040'
+set ylabel 'degrés Aleatoire 1' enhanced textcolor '#404040'
 
 set border 3 front linetype 1 linewidth 2 linecolor '#404040'
 unset grid
@@ -72,6 +72,6 @@ set style data histogram
 # PLOT COMMANDS
 #==============================================================================
 plot \
-    'plot0.dat' index 0 using 0:2:3:xtic(1) notitle with boxes linestyle 1 linewidth 2 fillcolor 'pink' fillstyle solid 0.5 border
+    'plot3.dat' index 0 using 0:2:3:xtic(1) notitle with boxes linestyle 1 linewidth 2 fillcolor 'pink' fillstyle solid 0.5 border
 
 

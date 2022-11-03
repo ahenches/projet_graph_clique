@@ -36,6 +36,8 @@ class Graphe {
     std::vector<int> calculerDegres();
     int calculerDegreMax();
     int compteCheminDistanceDeux();
+    std::set<int> cliqueMaximaleBronKerbosch();
+    std::set<int> algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites);
 
 
     int getNbSommet();

@@ -164,6 +164,69 @@ int Graphe::compteCheminDistanceDeux()
     return nbCheminLongDeux;
 }
 
+set<int> Graphe::cliqueMaximaleBronKerbosch()
+{
+    set<int>potentielleClique, sommetsTraites, candidatsClique, cliqueMax;
+
+    for(int i=0; i< nbSommet; i++)
+    {
+        candidatsClique.insert(i);
+    }
+   cliqueMax =  algoBronKerbosh(potentielleClique,candidatsClique,sommetsTraites);
+
+    return cliqueMax;
+
+    
+}
+
+set<int> Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites )
+{
+    Sommet pivot, sommetV;
+    int numPivot;
+    set<int>::iterator it;
+    set<int> pUnionX, pDiffVoisinPivot, pInterVoisinV, xInterVoisinV;
+
+    srand(time(nullptr));
+
+    if (p_candidatsClique.empty() && x_sommetsTraites.empty())
+    {
+        //cliqueMax = r_potentielleClique;
+        return r_potentielleClique;
+    }
+
+    // Choix du pivot
+    set_union(p_candidatsClique.begin(), p_candidatsClique.end(),
+                x_sommetsTraites.begin(),x_sommetsTraites.end(),
+                inserter(pUnionX, pUnionX.begin()));
+    
+    it = pUnionX.begin();
+    advance(it,rand()%pUnionX.size());
+    numPivot = *it;
+    pivot = sommets[numPivot];
+
+    set_difference(p_candidatsClique.begin(), p_candidatsClique.end(),
+                    pivot.getListeAdj().begin(), pivot.getListeAdj().end(),
+                    inserter(pDiffVoisinPivot, pDiffVoisinPivot.begin()));
+    
+    for(int v : pDiffVoisinPivot)
+    {
+        sommetV = sommets[v];
+        
+        set_intersection(p_candidatsClique.begin(), p_candidatsClique.end(),
+                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
+                        inserter(pInterVoisinV, pInterVoisinV.begin()));
+        
+        set_intersection(x_sommetsTraites.begin(), x_sommetsTraites.end(),
+                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
+                        inserter(xInterVoisinV, xInterVoisinV.begin()));
+        r_potentielleClique.insert(v);
+        algoBronKerbosh(r_potentielleClique,pInterVoisinV, xInterVoisinV);
+        p_candidatsClique.erase(v);
+        x_sommetsTraites.insert(v);
+    }
+    
+}
+
 /*
     Getter / Setter
 */

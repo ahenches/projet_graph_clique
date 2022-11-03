@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "src/histogram.hpp"
+//#include "src/histogram.hpp"
 #include "src/graphe.hpp"
 #include "src/sommet.hpp"
 #include "src/LectureEcriture.hpp"
@@ -65,7 +65,8 @@ int main()
     ecriture(grapheAleatoire2);
 */
 
-    /// Lecture des graphes deja enregistres
+    //////////////////////////// Lecture des graphes deja enregistres //////////////////////
+  /*  
     Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
     Graphe grapheEmailEu = lecture("copie_graphe_email_eu.txt");
     Graphe grapheLastFM = lecture("copie_graphe_lastfm_asia.txt");
@@ -73,7 +74,7 @@ int main()
     Graphe grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
 
 
-    /////////////////////////// Données sur les graphes /////////////////////////////
+    /////////////////////////// Données sur les graphes ////////////////////////////////////
 
     /// Degre Max
     
@@ -100,45 +101,54 @@ int main()
     cout << "Le nombre de chemin de longueur 2 du graphe Lastfm est : " << grapheLastFM.compteCheminDistanceDeux() << endl;
     cout << "Le nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
     cout << "Le nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl << endl;
-
-
-
-
-/*
-
-   Graphe g(true, 12000);
-    // cout << g.print();
-    // g.ajouterArete(0, 1);
-    // cout << g.print();
-    // g.ajouterArc(0, 2);
-
-
-    //g.genererArcsAleatoires(0.25);
-     //cout << g.print();
-    //std::vector<int> degres = g.calculerDegres();
-    // std::cout << g.getNbSommet() << std::endl;
-    // dessinerHistogrammeDegres(g.getNbSommet(), degres, "degrés");// Pour tester décommenter "#include "src/histogram.hpp"" et cette ligne
-
-    
-   /* Graphe graphe(true, 3);
-    graphe.ajouterArete(0, 1);
-    graphe.ajouterArete(0,2);
-    graphe.ajouterArc(1,2);
-    cout << graphe.print();*/
-    //compteCheminDistanceDeux(g);
-   // compteCheminDistanceDeux(g);
-    
-    
-    // ecriture(g);
-    // lecture ();
-    //Mon test
-   // string fichier("./fichiers/facebook_combined.txt");
-    //string fichier("./fichiers/email-Eu-core.txt");
-    /*string fichier("./fichiers/lastfm_asia_edges.csv");
-    //string fichier("./fichiers/graphe1.txt");
-    Graphe g1 = lectureFichierBDD(fichier,',', true);
-    cout << g1.nbArcs << endl;
-    ecriture(g1);
 */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////// 3 eme partie /////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////// Fin //////////////////////////////////////////////////////////////////////
+
+
+Graphe g(false, 6);
+g.ajouterArete(0,1);
+g.ajouterArete(0,2);
+g.ajouterArete(0,4);
+g.ajouterArete(1,2);
+g.ajouterArete(1,3);
+g.ajouterArete(1,5);
+g.ajouterArete(2,3);
+g.ajouterArete(2,5);
+g.ajouterArete(3,4);
+g.ajouterArete(3,5);
+
+set<int> clique = g.cliqueMaximaleBronKerbosch();
+
+for (int i : clique )
+{
+    cout << i << " ";
+}
+cout << endl;
+
     return 0;
 }
