@@ -130,25 +130,20 @@ int main()
 ///////////////////////////////////////////////////////////// Fin //////////////////////////////////////////////////////////////////////
 
 
-Graphe g(false, 6);
-g.ajouterArete(0,1);
-g.ajouterArete(0,2);
-g.ajouterArete(0,4);
-g.ajouterArete(1,2);
-g.ajouterArete(1,3);
-g.ajouterArete(1,5);
-g.ajouterArete(2,3);
-g.ajouterArete(2,5);
-g.ajouterArete(3,4);
-g.ajouterArete(3,5);
+    Graphe g(false, 4);
+    g.ajouterArete(0,1);
+    g.ajouterArete(0,2);
+    g.ajouterArete(1,2);
+    g.ajouterArete(1,2);
+    g.ajouterArete(2,3);
 
-set<int> clique = g.cliqueMaximaleBronKerbosch();
+    set<int> clique = g.cliqueMaximaleBronKerbosch();
 
-for (int i : clique )
-{
-    cout << i << " ";
-}
-cout << endl;
+    for (int i : clique )
+    {
+        cout << i << " ";
+    }
+    cout << endl;
 
     return 0;
 }
