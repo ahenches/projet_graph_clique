@@ -7,6 +7,12 @@
 #include "src/LectureEcriture.hpp"
 using namespace std;
 
+// void test(set<int>& mm)
+// {
+//     mm.insert(45);
+//     // return mm;
+// }
+
 int main()
 {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,16 +140,42 @@ int main()
     g.ajouterArete(0,1);
     g.ajouterArete(0,2);
     g.ajouterArete(1,2);
-    g.ajouterArete(1,2);
-    g.ajouterArete(2,3);
+    g.ajouterArete(1,3);
 
-    set<int> clique = g.cliqueMaximaleBronKerbosch();
-
-    for (int i : clique )
+    vector<set<int>> cliquesMax = g.cliqueMaximaleBronKerbosch();
+    cout << "RESULTAT :: " << endl;
+    for (auto clique : cliquesMax)
     {
-        cout << i << " ";
+        for (int i : clique)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
     }
     cout << endl;
 
+    // set<int> i, aut;
+    // i.insert(35);  
+    // i.insert(36);  
+    // i.insert(37);  
+    // i.insert(38);  
+    // i.insert(39);  
+    // aut = i;
+    // aut.insert(340);  
+    // aut.insert(32);  
+    // i.insert(3);  
+    // for(auto x :i)
+    // {
+    //     cout << x << " ";
+    //     i.erase(36);
+    // }
+    // cout << endl;
+
+    // for(auto x :aut)
+    // {
+    //     cout << x << " ";
+    //     i.erase(36);
+    // }
+    // cout << endl;
     return 0;
 }

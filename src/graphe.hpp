@@ -36,8 +36,9 @@ class Graphe {
     std::vector<int> calculerDegres();
     int calculerDegreMax();
     int compteCheminDistanceDeux();
-    std::set<int> cliqueMaximaleBronKerbosch();
-    std::set<int> algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites);
+    std::vector<std::set<int>> cliqueMaximaleBronKerbosch();
+    void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
+    void algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees, int niveau);
 
 
     int getNbSommet();
