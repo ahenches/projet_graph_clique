@@ -284,7 +284,7 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
     
     if (p_candidatsClique.empty() && x_sommetsTraites.empty())
     {
-        cout << "MARQUEE : {";
+        cout << "\t\tMARQUEE : {";
         for (auto val : r_potentielleClique)
             cout << val+1 << " ";
         cout << "}" << endl;
@@ -294,7 +294,7 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
 
     while (p_candidatsClique.size() != 0)
     {
-        int v = *p_candidatsClique_Copy.begin();
+        int v = *p_candidatsClique.begin();
         
         
         cout << endl << endl << "NOW  :: (" << niveau << ")" << v+1 << endl << endl;
@@ -314,11 +314,11 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
                         sommetV_listADJ.begin(), sommetV_listADJ.end(),
                         inserter(x_interVoisinV, x_interVoisinV.begin()));
 
-        r_interV = r_potentielleClique;
+        // r_interV = r_potentielleClique;
         // r_interV.insert(r_potentielleClique.begin(), r_potentielleClique.end());
-        r_interV.insert(v);
-        algoBronKerbosh(r_interV, p_interVoisinV, x_interVoisinV, cliqueMaxMarquees, niveau+1);
-        // r_potentielleClique
+        r_potentielleClique.insert(v);
+        algoBronKerbosh(r_potentielleClique, p_interVoisinV, x_interVoisinV, cliqueMaxMarquees, niveau+1);
+        r_potentielleClique.erase(v);
         p_candidatsClique.erase(v);
         // p_candidatsClique_Copy.erase(p_candidatsClique_Copy.begin());
         x_sommetsTraites.insert(v);
