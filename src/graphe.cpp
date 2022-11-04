@@ -300,19 +300,26 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
         cout << endl << endl << "NOW  :: (" << niveau << ")" << v+1 << endl << endl;
         usleep(microseconds);
 
-        
-
-        
         sommetV = sommets[v];
-        sommetV_listADJ = sommetV.getListeAdj();
-        
+        // sommetV_listADJ = sommetV.getListeAdj();
+        cout << endl << "\t\t $$$$ LISTE ADJ  : " ;
+        for (auto i : sommetV.getListeAdj())
+            cout << i+1 << " ";
+        cout << endl;
+
         set_intersection(p_candidatsClique.begin(), p_candidatsClique.end(),
-                        sommetV_listADJ.begin(), sommetV_listADJ.end(),
+                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
                         inserter(p_interVoisinV, p_interVoisinV.begin()));
         
         set_intersection(x_sommetsTraites.begin(), x_sommetsTraites.end(),
-                        sommetV_listADJ.begin(), sommetV_listADJ.end(),
+                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
                         inserter(x_interVoisinV, x_interVoisinV.begin()));
+
+
+        cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
+        for (auto i : p_interVoisinV)
+            cout << i+1 << " ";
+        cout << endl;
 
         // r_interV = r_potentielleClique;
         // r_interV.insert(r_potentielleClique.begin(), r_potentielleClique.end());
@@ -320,13 +327,27 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
         algoBronKerbosh(r_potentielleClique, p_interVoisinV, x_interVoisinV, cliqueMaxMarquees, niveau+1);
         r_potentielleClique.erase(v);
         p_candidatsClique.erase(v);
-        // p_candidatsClique_Copy.erase(p_candidatsClique_Copy.begin());
+
         x_sommetsTraites.insert(v);
         cout << endl << "FIN  :: (" << niveau << ")" << v+1 << endl;
-        cout << "TAILLE candidats : ";
-        cout << p_candidatsClique.size() << " ";
     }
-    cout << "FIN DE FONCTION " << niveau << endl;
+    cout << endl << "FIN DE FONCTION " << endl;
+    cout << "\tDEPTH : " << niveau << endl;
+    cout << "\tavec :: " << endl << endl;
+    cout << "\tVALEUR candidats : {";
+    for (auto val : p_candidatsClique)
+        cout << val+1 << " ";
+    cout << "}" << endl;
+
+    cout << "\tVALEUR clique : {";
+    for (auto val : r_potentielleClique)
+        cout << val+1 << " ";
+    cout << "}" << endl;
+
+    cout << "\tVALEUR traites : {";
+    for (auto val : x_sommetsTraites)
+        cout << val+1 << " ";
+    cout << "}" << endl;
 }
 
 /*

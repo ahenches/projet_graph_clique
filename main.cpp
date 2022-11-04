@@ -142,6 +142,11 @@ int main()
     g.ajouterArete(1,2);
     g.ajouterArete(1,3);
 
+    // for (auto som : g.getSommets())
+    // {
+    //     cout << som.print() << endl;
+    // }
+
     vector<set<int>> cliquesMax = g.cliqueMaximaleBronKerbosch();
     cout << "RESULTAT :: " << endl;
     for (auto clique : cliquesMax)
