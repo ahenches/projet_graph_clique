@@ -266,8 +266,6 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
     cout << "}" << endl;
 
     Sommet sommetV;
-    // int numPivot;
-    // set<int>::iterator it;
     set<int> r_interV, p_interVoisinV, x_interVoisinV, sommetV_listADJ;
 
     set<int> p_candidatsClique_Copy = p_candidatsClique;
@@ -292,23 +290,34 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
         return ;
     }
 
-    while (p_candidatsClique.size() != 0)
+    while (p_candidatsClique_Copy.size() != 0)
     {
-        int v = *p_candidatsClique.begin();
+        int v = *p_candidatsClique_Copy.begin();
         
         
         cout << endl << endl << "NOW  :: (" << niveau << ")" << v+1 << endl << endl;
         usleep(microseconds);
 
         sommetV = sommets[v];
-        // sommetV_listADJ = sommetV.getListeAdj();
-        cout << endl << "\t\t $$$$ LISTE ADJ  : " ;
-        for (auto i : sommetV.getListeAdj())
-            cout << i+1 << " ";
-        cout << endl;
+        sommetV_listADJ = sommetV.getListeAdj();
+        // cout << endl << "\t\t $$$$ LISTE ADJ  : " ;
+        // for (auto i : sommetV_listADJ)
+        //     cout << i+1 << " ";
+        // cout << endl;
+        // cout << endl << "\t\t $$$$ p_candidatsClique  : " ;
+        // for (auto i : p_candidatsClique)
+        //     cout << i+1 << " ";
+        // cout << endl;
 
-        set_intersection(p_candidatsClique.begin(), p_candidatsClique.end(),
-                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
+        // cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
+        // for (auto i : p_interVoisinV)
+        //     cout << i+1 << " ";
+        // cout << endl;
+
+        
+
+        set_intersection(sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
+                        p_candidatsClique.begin(), p_candidatsClique.end(),
                         inserter(p_interVoisinV, p_interVoisinV.begin()));
         
         set_intersection(x_sommetsTraites.begin(), x_sommetsTraites.end(),
@@ -316,17 +325,16 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
                         inserter(x_interVoisinV, x_interVoisinV.begin()));
 
 
-        cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
-        for (auto i : p_interVoisinV)
-            cout << i+1 << " ";
-        cout << endl;
+        // cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
+        // for (auto i : p_interVoisinV)
+        //     cout << i+1 << " ";
+        // cout << endl;
 
-        // r_interV = r_potentielleClique;
-        // r_interV.insert(r_potentielleClique.begin(), r_potentielleClique.end());
-        r_potentielleClique.insert(v);
-        algoBronKerbosh(r_potentielleClique, p_interVoisinV, x_interVoisinV, cliqueMaxMarquees, niveau+1);
-        r_potentielleClique.erase(v);
-        p_candidatsClique.erase(v);
+        r_interV = r_potentielleClique;
+        r_interV.insert(v);
+        algoBronKerbosh(std::move(r_interV), std::move(p_interVoisinV), std::move(x_interVoisinV), cliqueMaxMarquees, niveau+1);
+        p_candidatsClique.erase(p_candidatsClique.begin());
+        p_candidatsClique_Copy.erase(p_candidatsClique_Copy.begin());
 
         x_sommetsTraites.insert(v);
         cout << endl << "FIN  :: (" << niveau << ")" << v+1 << endl;

@@ -7,11 +7,14 @@
 #include "src/LectureEcriture.hpp"
 using namespace std;
 
-// void test(set<int>& mm)
-// {
-//     mm.insert(45);
-//     // return mm;
-// }
+set<int> test(set<int>& set_1, set<int>& set_2)
+{
+    set<int> ret;
+    set_intersection(set_1.begin(), set_1.end(), set_2.begin(), set_2.end(), 
+                     std::inserter(ret, ret.begin()));
+
+    return ret;
+}
 
 int main()
 {
@@ -159,27 +162,31 @@ int main()
     }
     cout << endl;
 
-    // set<int> i, aut;
+    // set<int> i, aut, set_1, set_2;
     // i.insert(35);  
     // i.insert(36);  
     // i.insert(37);  
     // i.insert(38);  
-    // i.insert(39);  
-    // aut = i;
+    // // i.insert(39);  
+    // // aut = i;
     // aut.insert(340);  
     // aut.insert(32);  
+    // aut.insert(35);  
+    // aut.insert(38);  
+    // aut.insert(8);  
+    // aut.insert(3);  
     // i.insert(3);  
-    // for(auto x :i)
+    // set_1 = test(i, aut);
+    // set_2 = test(aut, i);
+    // for(auto x :set_1)
     // {
     //     cout << x << " ";
-    //     i.erase(36);
     // }
     // cout << endl;
 
-    // for(auto x :aut)
+    // for(auto x :set_2)
     // {
     //     cout << x << " ";
-    //     i.erase(36);
     // }
     // cout << endl;
     return 0;
