@@ -177,7 +177,7 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
     {
         candidatsClique.insert(i);
     }
-    algoBronKerbosh(potentielleClique,candidatsClique,sommetsTraites, cliqueMaxMarquees, 0);
+    algoBronKerboshPivot(potentielleClique,candidatsClique,sommetsTraites, cliqueMaxMarquees);
 
     return cliqueMaxMarquees;
 }
@@ -240,7 +240,7 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
                         inserter(xInterVoisinV, xInterVoisinV.begin()));
         r_interV = r_potentielleClique;
         r_interV.insert(v);
-        algoBronKerboshPivot(r_interV, pInterVoisinV, xInterVoisinV, cliqueMaxMarquees);
+        algoBronKerboshPivot(std::move(r_interV), std::move(pInterVoisinV), std::move(xInterVoisinV), cliqueMaxMarquees);
         // r_potentielleClique
         p_candidatsClique.erase(v);
         x_sommetsTraites.insert(v);
