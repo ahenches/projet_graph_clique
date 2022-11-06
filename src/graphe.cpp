@@ -184,13 +184,13 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
 
 void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees)
 {
-    cout << "VALEUR candidats" << endl;
+   /* cout << "VALEUR candidats" << endl;
     for (auto val : p_candidatsClique)
         cout << val << endl;
     cout << "VALEUR clique" << endl;
     for (auto val : r_potentielleClique)
         cout << val << endl;
-
+*/
     Sommet pivot, sommetV;
     int numPivot;
     set<int>::iterator it;
@@ -202,9 +202,9 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
     
     if (p_candidatsClique.empty() && x_sommetsTraites.empty())
     {
-        cout << "MARQUEE" << endl;
+        /*cout << "MARQUEE" << endl;
         for (auto val : r_potentielleClique)
-            cout << val << endl;
+            cout << val << endl;*/
         cliqueMaxMarquees.push_back(r_potentielleClique);
         return;
     }
@@ -225,10 +225,11 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
     set_difference(p_candidatsClique.begin(), p_candidatsClique.end(),
                     pivot.getListeAdj().begin(), pivot.getListeAdj().end(),
                     inserter(pDiffVoisinPivot, pDiffVoisinPivot.begin()));
-    while (p_candidatsClique.size() != 0)
+    //while (p_candidatsClique.size() != 0)
+    for (int v : pDiffVoisinPivot)
     {
-        int v = *p_candidatsClique.begin();
-        cout << "NOW  :: " << v << endl << endl;
+        //int v = *p_candidatsClique.begin();
+       // cout << "NOW  :: " << v << endl << endl;
         sommetV = sommets[v];
         
         set_intersection(p_candidatsClique.begin(), p_candidatsClique.end(),

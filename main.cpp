@@ -21,8 +21,11 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 1 ere partie /////////////////////////////////////////////////////////////////
 
+    cout << "////////////////////////////////////////////////////////////////////////" << endl;
+    cout << "///////////////////////// 1ère partie /////////////////////////////////" << endl << endl;
     /////////////////////// Initialistations des graphes //////////////////////////
 /*
+    cout << "///////////////////// Initialisation des graphes ////////////////////" << endl << endl;
     /// Lecture des fichiers de la base de données de Stanford
         // A executer qu'une fois ou pour reinitialiser
 
@@ -75,7 +78,8 @@ int main()
 */
 
     //////////////////////////// Lecture des graphes deja enregistres //////////////////////
-  /*  
+
+    cout << "//////////////// Lecture des graphes déjà enregistrés /////////////////" << endl << endl;
     Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
     Graphe grapheEmailEu = lecture("copie_graphe_email_eu.txt");
     Graphe grapheLastFM = lecture("copie_graphe_lastfm_asia.txt");
@@ -87,15 +91,16 @@ int main()
 
     /// Degre Max
     
-    cout << "Le degré maximum du graphe Facebook est : " << grapheFacebook.calculerDegreMax() << endl;
-    cout << "Le degré maximum du graphe Email EU est : " << grapheEmailEu.calculerDegreMax() << endl;
-    cout << "Le degré maximum du graphe Lastfm est : " << grapheLastFM.calculerDegreMax() << endl;
-    cout << "Le degré maximum du graphe Aleatoire 1 est : " << grapheAleatoire1.calculerDegreMax() << endl;
-    cout << "Le degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl << endl;
+    cout << "//////////////// Degré maximum des graphes /////////////////" << endl << endl;
+    cout << "\tLe degré maximum du graphe Facebook est : " << grapheFacebook.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Email EU est : " << grapheEmailEu.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Lastfm est : " << grapheLastFM.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Aleatoire 1 est : " << grapheAleatoire1.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl << endl;
 
 
     /// Graphique des degres
-
+/*
     dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
     dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
     dessinerHistogrammeDegres(grapheLastFM.getNbSommet(), grapheLastFM.calculerDegres(), "degrés LastFM");
@@ -105,14 +110,68 @@ int main()
 
     /// Nombre de chemins de longueur 2
 
-    cout << "Le nombre de chemin de longueur 2 du graphe Facebook est : " << grapheFacebook.compteCheminDistanceDeux() << endl;
-    cout << "Le nombre de chemin de longueur 2 du graphe Email EU est : " << grapheEmailEu.compteCheminDistanceDeux() << endl;
-    cout << "Le nombre de chemin de longueur 2 du graphe Lastfm est : " << grapheLastFM.compteCheminDistanceDeux() << endl;
-    cout << "Le nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
-    cout << "Le nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl << endl;
+    cout << "//////////////// Nombre de chemin de longueur 2 /////////////////" << endl << endl;
+    cout << "\tLe nombre de chemin de longueur 2 du graphe Facebook est : " << grapheFacebook.compteCheminDistanceDeux() << endl;
+    cout << "\tLe nombre de chemin de longueur 2 du graphe Email EU est : " << grapheEmailEu.compteCheminDistanceDeux() << endl;
+    cout << "\tLe nombre de chemin de longueur 2 du graphe Lastfm est : " << grapheLastFM.compteCheminDistanceDeux() << endl;
+    cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
+    cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl << endl;
 */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
+
+    vector<set<int>> cliquesMaxPetitGraphe, cliquesMaxGrapheAleatoire;
+    cout << "////////////////////////////////////////////////////////////////////////" << endl;
+    cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
+
+    Graphe petitGraphe(false, 6);
+    petitGraphe.ajouterArete(0,1);
+    petitGraphe.ajouterArete(0,2);
+    petitGraphe.ajouterArete(0,4);
+    petitGraphe.ajouterArete(1,2);
+    petitGraphe.ajouterArete(1,3);
+    petitGraphe.ajouterArete(1,5);
+    petitGraphe.ajouterArete(2,3);
+    petitGraphe.ajouterArete(2,5);
+    petitGraphe.ajouterArete(3,4);
+    petitGraphe.ajouterArete(3,5);
+    //petitGraphe.ajouterArete(0,1);
+    //petitGraphe.ajouterArete(0,2);
+    //petitGraphe.ajouterArete(1,2);
+    //petitGraphe.ajouterArete(1,3);
+
+    cout << "Petit graphe :" << endl;
+    cout << petitGraphe.print() << endl << endl;
+
+    cout << "/////////////////////// Cliques Maximales /////////////////////////////" << endl << endl;
+    cout << "\tExemple sur le petit graphe " << endl;
+
+    cliquesMaxPetitGraphe = petitGraphe.cliqueMaximaleBronKerbosch();
+
+    cout << "\tCliques maximales : " << endl;
+    for (auto clique : cliquesMaxPetitGraphe)
+    {
+        cout << "\t";
+        for (int i : clique)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
+
+    cout << endl << "\tExemple sur un graphe aléatoire " << endl;
+    cliquesMaxGrapheAleatoire = grapheAleatoire1.cliqueMaximaleBronKerbosch();
+
+    cout << "\tCliques maximales : " << endl;
+    for (auto clique : cliquesMaxGrapheAleatoire)
+    {
+        cout << "\t";
+        for (int i : clique)
+        {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 
 
 
@@ -138,12 +197,24 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////// Fin //////////////////////////////////////////////////////////////////////
 
+/*
+    Graphe petitGraphe(false, 4);
+    petitGraphe.ajouterArete(0,1);
+    petitGraphe.ajouterArete(0,2);
+    petitGraphe.ajouterArete(1,2);
+    petitGraphe.ajouterArete(1,3);
 
-    Graphe g(false, 4);
+    Graphe g(false, 6);
     g.ajouterArete(0,1);
     g.ajouterArete(0,2);
+    g.ajouterArete(0,4);
     g.ajouterArete(1,2);
     g.ajouterArete(1,3);
+    g.ajouterArete(1,5);
+    g.ajouterArete(2,3);
+    g.ajouterArete(2,5);
+    g.ajouterArete(3,4);
+    g.ajouterArete(3,5);
 
     // for (auto som : g.getSommets())
     // {
@@ -161,7 +232,7 @@ int main()
         cout << endl;
     }
     cout << endl;
-
+*/
     // set<int> i, aut, set_1, set_2;
     // i.insert(35);  
     // i.insert(36);  
