@@ -9,7 +9,7 @@
 #include <set>
 #include "./graphe.hpp"
 
-Graphe lectureFichierBDD(std::string nomFichier, char separateur, bool estUnfichierCSV);
+Graphe lectureFichierBDD(std::string nomFichier, char separateur, bool estUnfichierCSV, int nbSommet, bool oriente);
 Graphe lecture(std::string nomFichier);
 void ecriture(Graphe graphe);
 std::vector<int> decoupeChaine(std::string chaine, char delimiteur);

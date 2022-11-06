@@ -10,10 +10,13 @@
 #include <sstream>
 #include <set>
 #include <algorithm>
-
-
 #include "sommet.hpp"
 
+#define NB_SOMMET_FACEBOOK 4039
+#define NB_SOMMET_EMAIL_EU 1005
+#define NB_SOMMET_LASTFM 7624
+#define ORIENTE 1
+#define NON_ORIENTE 0
 
 class Graphe {
 
@@ -38,7 +41,7 @@ class Graphe {
     int compteCheminDistanceDeux();
     std::vector<std::set<int>> cliqueMaximaleBronKerbosch();
     void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
-    void algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees, int niveau);
+    //void algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees, int niveau);
 
 
     int getNbSommet();

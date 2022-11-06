@@ -2,31 +2,15 @@
 
 using namespace std;
 
-Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCSV)
+Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCSV, int nbSommet, bool oriente)
 {
-    int nbSommet, sommetSource, sommetDest;
-    bool oriente;
+    int sommetSource, sommetDest;
     string ligneAvantDecoupe;
     vector <int> ligneDecoupee;
     ifstream fichier(nomFichier.c_str());  //Ouverture en lecture du fichier
 
     if(fichier)
     {
-        //Nombre de sommets et oriente ou non
-        cout << "Fichier en cours de lecture : " << nomFichier << endl;
-        cout << "\tEntrez le nombre de sommets de votre graphe : " << endl;
-        cin >> nbSommet; 
-
-        cout << "\tVotre graphe est il orienté ? " << endl << "\tTapez 0 pour non ou 1 pour oui" << endl;
-        cin >> oriente;
-
-        if(oriente){
-            cout << "\tVotre graphe a " << nbSommet << " sommet et est orienté" << endl; 
-        }
-        else {
-            cout << "\tVotre graphe a " << nbSommet << " sommet et est non-orienté" << endl; 
-        }
-
         //Création graphe 
         Graphe graphe(oriente,nbSommet);
 

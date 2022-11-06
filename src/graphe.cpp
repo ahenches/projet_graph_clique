@@ -173,6 +173,7 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
     set<int>potentielleClique, sommetsTraites, candidatsClique, cliqueMax;
     vector<set<int>> cliqueMaxMarquees;
 
+    // P (candidats) = tous les sommets du graphe
     for(int i=0; i< nbSommet; i++)
     {
         candidatsClique.insert(i);
@@ -184,69 +185,62 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
 
 void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees)
 {
-   /* cout << "VALEUR candidats" << endl;
-    for (auto val : p_candidatsClique)
-        cout << val << endl;
-    cout << "VALEUR clique" << endl;
-    for (auto val : r_potentielleClique)
-        cout << val << endl;
-*/
     Sommet pivot, sommetV;
     int numPivot;
     set<int>::iterator it;
     set<int> pUnionX, pDiffVoisinPivot, pInterVoisinV, xInterVoisinV, r_interV;
-
-    
-
-    
     
     if (p_candidatsClique.empty() && x_sommetsTraites.empty())
     {
-        /*cout << "MARQUEE" << endl;
-        for (auto val : r_potentielleClique)
-            cout << val << endl;*/
         cliqueMaxMarquees.push_back(r_potentielleClique);
         return;
     }
-
+    // Choix du pivot
     srand(time(nullptr));
 
-    // Choix du pivot
+    // P U X
     set_union(p_candidatsClique.begin(), p_candidatsClique.end(),
                 x_sommetsTraites.begin(),x_sommetsTraites.end(),
                 inserter(pUnionX, pUnionX.begin()));
-
     
     it = pUnionX.begin();
     advance(it,rand()%pUnionX.size());
     numPivot = *it;
     pivot = sommets[numPivot];
 
+    // P \ Voisin(pivot)
     set_difference(p_candidatsClique.begin(), p_candidatsClique.end(),
                     pivot.getListeAdj().begin(), pivot.getListeAdj().end(),
                     inserter(pDiffVoisinPivot, pDiffVoisinPivot.begin()));
-    //while (p_candidatsClique.size() != 0)
+    
     for (int v : pDiffVoisinPivot)
     {
-        //int v = *p_candidatsClique.begin();
-       // cout << "NOW  :: " << v << endl << endl;
         sommetV = sommets[v];
         
+        // P ⋂ Voisin(v)
         set_intersection(p_candidatsClique.begin(), p_candidatsClique.end(),
                         sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
                         inserter(pInterVoisinV, pInterVoisinV.begin()));
         
+        // X ⋂ Voisin(v)
         set_intersection(x_sommetsTraites.begin(), x_sommetsTraites.end(),
                         sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
                         inserter(xInterVoisinV, xInterVoisinV.begin()));
+        // R U v
         r_interV = r_potentielleClique;
         r_interV.insert(v);
+
+        // Appel recursif
         algoBronKerboshPivot(std::move(r_interV), std::move(pInterVoisinV), std::move(xInterVoisinV), cliqueMaxMarquees);
-        // r_potentielleClique
+        
+        // P = P \ v
         p_candidatsClique.erase(v);
+
+        // X = X U v
         x_sommetsTraites.insert(v);
     }
 }
+/*
 void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees, int niveau)
 {
     cout << "DEPTH : " << niveau << endl;
@@ -358,7 +352,7 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
         cout << val+1 << " ";
     cout << "}" << endl;
 }
-
+*/
 /*
     Getter / Setter
 */
