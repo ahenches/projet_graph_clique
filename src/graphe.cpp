@@ -142,30 +142,37 @@ int Graphe::calculerDegreMax()
 int Graphe::compteCheminDistanceDeux()
 {
     vector<Sommet> sommetsGraphe = getSommets();
-    set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
+    set<int> listeDistanceDeux;
     int nbCheminLongDeux;
 
     nbCheminLongDeux = 0;
 
     for (Sommet sommetDepart : sommetsGraphe)
     {
-        for(int voisinCourant : sommetDepart.getListeAdj())
-        {
-            listeAdjSomMilieu = getSommet(voisinCourant).getListeAdj();
-                        
-            set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
-                            listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
-                            inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
-           
-            nbCheminLongDeux  += static_cast<int>(listeSommetsArrivee.size());
-            if (listeSommetsArrivee.find(sommetDepart.getNum()) != listeSommetsArrivee.end())
-            {
-                nbCheminLongDeux -= 1;
-            }
-            listeSommetsArrivee.clear();
-        }
+        listeDistanceDeux = distanceDeuxDuSommet(sommetDepart.getNum());
+        nbCheminLongDeux += listeDistanceDeux.size();
     }
     return nbCheminLongDeux;
+}
+set<int> Graphe::distanceDeuxDuSommet(int sommet)
+{
+    set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
+    Sommet sommetCourant;
+    sommetCourant = getSommet(sommet);
+    listeAdjSomDepart = sommetCourant.getListeAdj();
+    for(int voisinCourant : listeAdjSomDepart)
+    {
+        listeAdjSomMilieu = getSommet(voisinCourant).getListeAdj();
+                    
+        set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
+                        listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
+                        inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
+    }
+    if (listeSommetsArrivee.find(sommet) != listeSommetsArrivee.end())
+    {
+        listeSommetsArrivee.erase(sommet);
+    }
+    return listeSommetsArrivee;
 }
 
 vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
@@ -353,6 +360,79 @@ void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsC
     cout << "}" << endl;
 }
 */
+
+bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
+{
+    bool areteExiste;
+    set<int> listeADJ;
+
+    areteExiste = false;
+    listeADJ = sommets[sommet1].getListeAdj();
+
+    if(listeADJ.find(sommet2) != listeADJ.end())
+    {
+        areteExiste = true;
+    }
+    return areteExiste;
+}
+
+
+Graphe Graphe::sousGrapheGi(int sommet)
+{
+    set<int> voisinsN1, voisinsN2, listeSommetsGraphe;
+    Graphe gi(false);
+
+    voisinsN1 = sommets[sommet].getListeAdj();
+    voisinsN2 = distanceDeuxDuSommet(sommet);
+
+    listeSommetsGraphe.insert(sommet);
+    set_union(voisinsN1.begin(), voisinsN1.end(),
+                voisinsN2.begin(), voisinsN2.end(),
+                inserter(listeSommetsGraphe,listeSommetsGraphe.begin()));
+
+    for(int s : listeSommetsGraphe)
+    {
+        gi.ajouterSommet(s);
+    }
+/*
+    for(int x : voisinsN1){
+        for(int y1 : voisinsN1)
+        {
+            if (x != y1)
+            {
+                if(estAreteDansGraphe(x,y1))
+                {
+                    gi.ajouterArete(x,y1);
+                }
+            }
+        }
+        for(int y2 : voisinsN2)
+        {
+            if (x != y2)
+            {
+                if(!estAreteDansGraphe(x,y2))
+                {
+                    gi.ajouterArete(x,y2);
+                }
+            }
+        }
+    }*/
+    for(int x : voisinsN2){
+        for(int y : voisinsN2)
+        {
+            if (x != y)
+            {
+                if(estAreteDansGraphe(x,y))
+                {
+                    gi.ajouterArete(x,y);
+                }
+            }
+        }
+    }
+ 
+    return gi;
+}
+
 /*
     Getter / Setter
 */
