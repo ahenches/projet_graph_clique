@@ -216,8 +216,9 @@ int main()
     g.ajouterArete(3,5);
 //g.ajouterArete(0,4);
 //g.ajouterArete(3,4);
+    cout << g.compteCheminDistanceDeux();
     Graphe g1 = g.sousGrapheGi(1);
-    cout << g1.print();
+   // cout << g1.print();
 
     
     return 0;

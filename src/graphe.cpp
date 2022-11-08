@@ -170,11 +170,18 @@ set<int> Graphe::distanceDeuxDuSommet(int sommet)
         set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
                         listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                         inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
+        
+        for(int i : listeSommetsArrivee)
+        {
+            if (i != sommet)
+           cout << " chemin \n\tdepart : " << sommet << ", milieu : " << voisinCourant << ", arrivee :  "<< i <<endl;
+        }
     }
     if (listeSommetsArrivee.find(sommet) != listeSommetsArrivee.end())
     {
         listeSommetsArrivee.erase(sommet);
     }
+    
     return listeSommetsArrivee;
 }
 
