@@ -39,7 +39,7 @@ class Graphe {
     std::vector<int> calculerDegres();
     int calculerDegreMax();
     int compteCheminDistanceDeux();
-    std::set<int> distanceDeuxDuSommet(int sommet);
+    std::vector<int> distanceDeuxDuSommet(int sommet);
     std::vector<std::set<int>> cliqueMaximaleBronKerbosch();
     void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
     bool estAreteDansGraphe(int sommet1, int sommet2);

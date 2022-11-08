@@ -113,7 +113,7 @@ int main()
 
 
     /// Graphique des degres
-
+/*
     dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
     dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
     dessinerHistogrammeDegres(grapheLastFM.getNbSommet(), grapheLastFM.calculerDegres(), "degrés LastFM");
@@ -121,9 +121,9 @@ int main()
     dessinerHistogrammeDegres(grapheAleatoire2.getNbSommet(), grapheAleatoire2.calculerDegres(), "degrés Aleatoire 2");
     dessinerHistogrammeDegres(grapheAleatoire3.getNbSommet(), grapheAleatoire3.calculerDegres(), "degrés Aleatoire 3");
 
-
+*/
     /// Nombre de chemins de longueur 2
-
+/*
     cout << "//////////////// Nombre de chemin de longueur 2 /////////////////" << endl << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Facebook est : " << grapheFacebook.compteCheminDistanceDeux() << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Email EU est : " << grapheEmailEu.compteCheminDistanceDeux() << endl;
@@ -131,10 +131,10 @@ int main()
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 3 est : " << grapheAleatoire3.compteCheminDistanceDeux() << endl << endl;
-
+*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
-
+/*
     cout << "////////////////////////////////////////////////////////////////////////" << endl;
     cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
 
@@ -216,9 +216,9 @@ int main()
     g.ajouterArete(3,5);
 //g.ajouterArete(0,4);
 //g.ajouterArete(3,4);
-    cout << g.compteCheminDistanceDeux();
+    //cout << g.compteCheminDistanceDeux();
     Graphe g1 = g.sousGrapheGi(1);
-   // cout << g1.print();
+    cout << g1.print();
 
     
     return 0;

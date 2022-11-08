@@ -143,7 +143,7 @@ int Graphe::calculerDegreMax()
 int Graphe::compteCheminDistanceDeux()
 {
     map<int, Sommet> sommetsGraphe = getSommets();
-    set<int> listeDistanceDeux;
+    vector<int> listeDistanceDeux;
     int nbCheminLongDeux;
 
     nbCheminLongDeux = 0;
@@ -157,30 +157,24 @@ int Graphe::compteCheminDistanceDeux()
     }
     return nbCheminLongDeux;
 }
-set<int> Graphe::distanceDeuxDuSommet(int sommet)
+vector<int> Graphe::distanceDeuxDuSommet(int sommet)
 {
-    set<int> listeAdjSomDepart, listeAdjSomMilieu, listeSommetsArrivee;
+    set<int> listeAdjSomDepart, listeAdjSomMilieu;
+    vector<int>listeSommetsArrivee;
     Sommet sommetCourant;
+
     sommetCourant = getSommet(sommet);
     listeAdjSomDepart = sommetCourant.getListeAdj();
+    listeAdjSomDepart.insert(sommet);
+
     for(int voisinCourant : listeAdjSomDepart)
     {
         listeAdjSomMilieu = getSommet(voisinCourant).getListeAdj();
-                    
+                            
         set_difference(listeAdjSomMilieu.begin(), listeAdjSomMilieu.end(),
                         listeAdjSomDepart.begin(),listeAdjSomDepart.end(),
                         inserter(listeSommetsArrivee, listeSommetsArrivee.begin()));
-        
-        for(int i : listeSommetsArrivee)
-        {
-            if (i != sommet)
-           cout << " chemin \n\tdepart : " << sommet << ", milieu : " << voisinCourant << ", arrivee :  "<< i <<endl;
-        }
-    }
-    if (listeSommetsArrivee.find(sommet) != listeSommetsArrivee.end())
-    {
-        listeSommetsArrivee.erase(sommet);
-    }
+    }    
     
     return listeSommetsArrivee;
 }
@@ -276,6 +270,7 @@ bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
 
 Graphe Graphe::sousGrapheGi(int sommet)
 {
+    vector<int> voisinsD2Tmp;
     set<int>  voisinsD1, voisinsD2, listeSommetsGraphe, listeVi, listeN1, listeN2;
     Graphe gi(false);
     
@@ -286,7 +281,12 @@ Graphe Graphe::sousGrapheGi(int sommet)
     }
     
     voisinsD1 = sommets[sommet].getListeAdj();
-    voisinsD2 = distanceDeuxDuSommet(sommet);
+    voisinsD2Tmp = distanceDeuxDuSommet(sommet);
+
+    for(int v : voisinsD2Tmp)
+    {
+        voisinsD2.insert(v);
+    }
 
     set_intersection(listeVi.begin(), listeVi.end(),
                     voisinsD1.begin(), voisinsD1.end(),
