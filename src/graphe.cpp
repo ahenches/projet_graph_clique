@@ -113,6 +113,22 @@ string Graphe::print()
 /*
     Calculs
 */
+
+bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
+{
+    bool areteExiste;
+    set<int> listeADJS1;
+
+    areteExiste = false;
+    listeADJS1 = sommets[sommet1].getListeAdj();
+
+    if(listeADJS1.find(sommet2) != listeADJS1.end())
+    {
+        areteExiste = true;
+    }
+    return areteExiste;
+}
+
 vector<int> Graphe::calculerDegres()
 {
     vector<int> retDegres(nbSommet);
@@ -157,6 +173,7 @@ int Graphe::compteCheminDistanceDeux()
     }
     return nbCheminLongDeux;
 }
+
 vector<int> Graphe::distanceDeuxDuSommet(int sommet)
 {
     set<int> listeAdjSomDepart, listeAdjSomMilieu;
@@ -252,20 +269,34 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
     }
 }
 
-bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
+Graphe Graphe::complementaireGraphe()
 {
-    bool areteExiste;
-    set<int> listeADJS1;
-
-    areteExiste = false;
-    listeADJS1 = sommets[sommet1].getListeAdj();
-
-    if(listeADJS1.find(sommet2) != listeADJS1.end())
+    Graphe retGraphe(nbSommet);
+    
+    retGraphe.getSommets() = sommets;
+    Sommet s1;
+    int s2;
+    map<int, Sommet>::iterator itr;
+    for(itr = sommets.begin(); itr != sommets.end(); itr++)
     {
-        areteExiste = true;
+        retGraphe.getSommets()[itr ->first].getListeAdj().clear();
+        s1 = itr ->second;
+        map<int, Sommet>::iterator itr2;
+        for(itr2 = sommets.begin(); itr2 != sommets.end(); itr2++)
+        {
+            s2 = itr2 ->first;
+            if(!(s2 == s1.getNum()) && !estAreteDansGraphe(s1.getNum(), s2)) 
+                retGraphe.getSommets()[s1.getNum()].ajouterVoisin(s2);
+            else
+            {
+                // do nothing
+            }
+        }
     }
-    return areteExiste;
+    return retGraphe;
+
 }
+
 
 
 Graphe Graphe::sousGrapheGi(int sommet)

@@ -24,9 +24,10 @@ class Graphe {
     int nbSommet;
     bool estOriente;
     int nbArcs;
+    std::map<int,Sommet> sommets;
 
     public: 
-    std::map<int,Sommet> sommets;
+    
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);
     void genererArcsAleatoires();
@@ -44,6 +45,7 @@ class Graphe {
     void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
     bool estAreteDansGraphe(int sommet1, int sommet2);
     Graphe sousGrapheGi(int sommet);
+    Graphe complementaireGraphe();
 
 
     int getNbSommet();
