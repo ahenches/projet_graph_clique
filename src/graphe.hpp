@@ -26,7 +26,7 @@ class Graphe {
     int nbArcs;
 
     public: 
-    std::vector<Sommet> sommets;
+    std::map<int,Sommet> sommets;
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);
     void genererArcsAleatoires();
@@ -42,7 +42,6 @@ class Graphe {
     std::set<int> distanceDeuxDuSommet(int sommet);
     std::vector<std::set<int>> cliqueMaximaleBronKerbosch();
     void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
-    //void algoBronKerbosh(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees, int niveau);
     bool estAreteDansGraphe(int sommet1, int sommet2);
     Graphe sousGrapheGi(int sommet);
 
@@ -50,7 +49,7 @@ class Graphe {
     int getNbSommet();
     bool getEstOriente();
     int getNbArcs();
-    std::vector<Sommet>& getSommets();
+    std::map<int,Sommet>& getSommets();
     Sommet& getSommet(int i);
     void test();
 

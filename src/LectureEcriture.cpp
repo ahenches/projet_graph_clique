@@ -99,7 +99,7 @@ Graphe lecture(string nomFichier)
 void ecriture(Graphe graphe)
 {
     string nomFichier, cheminFichier;
-    vector<Sommet> sommetsGraphe;
+    map<int,Sommet> sommetsGraphe;
     set<int>listeAdjSommet;
     Sommet sommetSource, sommetDest;
     int  nbVoisin;
@@ -119,9 +119,10 @@ void ecriture(Graphe graphe)
 
         //Ecriture des listes d adjacence
         sommetsGraphe = graphe.getSommets();
-        for (auto sommetCourant : sommetsGraphe)
+        map<int, Sommet>::iterator itr;
+        for(itr = sommetsGraphe.begin(); itr != sommetsGraphe.end(); itr++)
         {
-            sommetSource = sommetCourant;
+            sommetSource = itr -> second;
             nbVoisin =  static_cast<int>(sommetSource.getListeAdj().size());
             if(nbVoisin > 0 ) //Le sommet a au moins 1 voisin
             {

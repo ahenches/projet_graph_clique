@@ -87,9 +87,9 @@ int main()
     Graphe grapheAleatoire3 (estOriente, nbSommet);
     grapheAleatoire3.genererArcsAleatoires();
     ecriture(grapheAleatoire3);
-
+*/
     //////////////////////////// Lecture des graphes deja enregistres //////////////////////
-
+/*
     cout << "//////////////// Lecture des graphes déjà enregistrés /////////////////" << endl << endl;
     Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
     Graphe grapheEmailEu = lecture("copie_graphe_email_eu.txt");
@@ -111,9 +111,9 @@ int main()
     cout << "\tLe degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl;
     cout << "\tLe degré maximum du graphe Aleatoire 3 est : " << grapheAleatoire3.calculerDegreMax() << endl << endl;
 
-*/
+
     /// Graphique des degres
-/*
+
     dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
     dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
     dessinerHistogrammeDegres(grapheLastFM.getNbSommet(), grapheLastFM.calculerDegres(), "degrés LastFM");
@@ -131,10 +131,10 @@ int main()
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl;
     cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 3 est : " << grapheAleatoire3.compteCheminDistanceDeux() << endl << endl;
-*/
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
-/*
+
     cout << "////////////////////////////////////////////////////////////////////////" << endl;
     cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
 
@@ -208,16 +208,17 @@ int main()
     Graphe g(false, 6);
     g.ajouterArete(0,1);
     g.ajouterArete(0,2);
-    //g.ajouterArete(0,4);
     g.ajouterArete(1,2);
     g.ajouterArete(1,3);
     g.ajouterArete(1,5);
     g.ajouterArete(2,3);
     g.ajouterArete(2,5);
-    //g.ajouterArete(3,4);
     g.ajouterArete(3,5);
-
+//g.ajouterArete(0,4);
+//g.ajouterArete(3,4);
     Graphe g1 = g.sousGrapheGi(1);
     cout << g1.print();
+
+    
     return 0;
 }

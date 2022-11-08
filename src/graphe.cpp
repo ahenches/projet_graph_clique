@@ -23,7 +23,6 @@ Graphe::Graphe(bool oriente)
 Graphe::Graphe(bool oriente, int nSommet)
 {
     estOriente = oriente;
-    sommets.resize (nSommet);
     Sommet s;
     for(int i = 0; i < nSommet; i++)
     {
@@ -77,7 +76,7 @@ void Graphe::genererArcsAleatoires()
 bool Graphe::ajouterSommet(int num)
 {
     Sommet s(num);
-    sommets.push_back(s);
+    sommets[num] = s;
     nbSommet++;
 
     return true;
@@ -102,9 +101,11 @@ void Graphe::ajouterArete(int s1Num, int s2Num)
 string Graphe::print()
 {
     string printString;
-    for(Sommet sommet : sommets)
+    map<int, Sommet>::iterator itr;
+    for(itr = sommets.begin(); itr != sommets.end(); itr++)
     {
-        printString += sommet.print() + "\n";
+        Sommet s = itr ->second;
+        printString += s.print() + "\n";
     }
     return printString;
 }
@@ -141,14 +142,16 @@ int Graphe::calculerDegreMax()
 
 int Graphe::compteCheminDistanceDeux()
 {
-    vector<Sommet> sommetsGraphe = getSommets();
+    map<int, Sommet> sommetsGraphe = getSommets();
     set<int> listeDistanceDeux;
     int nbCheminLongDeux;
 
     nbCheminLongDeux = 0;
 
-    for (Sommet sommetDepart : sommetsGraphe)
+    map<int, Sommet>::iterator itr;
+    for(itr = sommets.begin(); itr != sommets.end(); itr++)
     {
+        Sommet sommetDepart = itr -> second;
         listeDistanceDeux = distanceDeuxDuSommet(sommetDepart.getNum());
         nbCheminLongDeux += listeDistanceDeux.size();
     }
@@ -247,129 +250,16 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
         x_sommetsTraites.insert(v);
     }
 }
-/*
-void Graphe::algoBronKerbosh(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees, int niveau)
-{
-    cout << "DEPTH : " << niveau << endl;
-    cout << "avec :: " << endl << endl;
-    cout << "VALEUR candidats : {";
-    for (auto val : p_candidatsClique)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-
-    cout << "VALEUR clique : {";
-    for (auto val : r_potentielleClique)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-
-    cout << "VALEUR traites : {";
-    for (auto val : x_sommetsTraites)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-
-    Sommet sommetV;
-    set<int> r_interV, p_interVoisinV, x_interVoisinV, sommetV_listADJ;
-
-    set<int> p_candidatsClique_Copy = p_candidatsClique;
-
-    // algorithme BronKerbosch1(R, P, X)
-    // si P et X sont vides alors
-    //     déclarer R clique maximale
-    // pour tout sommet v de P faire
-    //     BronKerbosch1(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
-    //     P := P \ {v}
-    //     X := X ⋃ {v}
-
-    
-    
-    if (p_candidatsClique.empty() && x_sommetsTraites.empty())
-    {
-        cout << "\t\tMARQUEE : {";
-        for (auto val : r_potentielleClique)
-            cout << val+1 << " ";
-        cout << "}" << endl;
-        cliqueMaxMarquees.push_back(r_potentielleClique);
-        return ;
-    }
-
-    while (p_candidatsClique_Copy.size() != 0)
-    {
-        int v = *p_candidatsClique_Copy.begin();
-        
-        
-        cout << endl << endl << "NOW  :: (" << niveau << ")" << v+1 << endl << endl;
-        usleep(microseconds);
-
-        sommetV = sommets[v];
-        sommetV_listADJ = sommetV.getListeAdj();
-        // cout << endl << "\t\t $$$$ LISTE ADJ  : " ;
-        // for (auto i : sommetV_listADJ)
-        //     cout << i+1 << " ";
-        // cout << endl;
-        // cout << endl << "\t\t $$$$ p_candidatsClique  : " ;
-        // for (auto i : p_candidatsClique)
-        //     cout << i+1 << " ";
-        // cout << endl;
-
-        // cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
-        // for (auto i : p_interVoisinV)
-        //     cout << i+1 << " ";
-        // cout << endl;
-
-        
-
-        set_intersection(sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
-                        p_candidatsClique.begin(), p_candidatsClique.end(),
-                        inserter(p_interVoisinV, p_interVoisinV.begin()));
-        
-        set_intersection(x_sommetsTraites.begin(), x_sommetsTraites.end(),
-                        sommetV.getListeAdj().begin(), sommetV.getListeAdj().end(),
-                        inserter(x_interVoisinV, x_interVoisinV.begin()));
-
-
-        // cout << endl << "\t\t $$$$ p_interVoisinV  : " ;
-        // for (auto i : p_interVoisinV)
-        //     cout << i+1 << " ";
-        // cout << endl;
-
-        r_interV = r_potentielleClique;
-        r_interV.insert(v);
-        algoBronKerbosh(std::move(r_interV), std::move(p_interVoisinV), std::move(x_interVoisinV), cliqueMaxMarquees, niveau+1);
-        p_candidatsClique.erase(p_candidatsClique.begin());
-        p_candidatsClique_Copy.erase(p_candidatsClique_Copy.begin());
-
-        x_sommetsTraites.insert(v);
-        cout << endl << "FIN  :: (" << niveau << ")" << v+1 << endl;
-    }
-    cout << endl << "FIN DE FONCTION " << endl;
-    cout << "\tDEPTH : " << niveau << endl;
-    cout << "\tavec :: " << endl << endl;
-    cout << "\tVALEUR candidats : {";
-    for (auto val : p_candidatsClique)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-
-    cout << "\tVALEUR clique : {";
-    for (auto val : r_potentielleClique)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-
-    cout << "\tVALEUR traites : {";
-    for (auto val : x_sommetsTraites)
-        cout << val+1 << " ";
-    cout << "}" << endl;
-}
-*/
 
 bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
 {
     bool areteExiste;
-    set<int> listeADJ;
+    set<int> listeADJS1;
 
     areteExiste = false;
-    listeADJ = sommets[sommet1].getListeAdj();
+    listeADJS1 = sommets[sommet1].getListeAdj();
 
-    if(listeADJ.find(sommet2) != listeADJ.end())
+    if(listeADJS1.find(sommet2) != listeADJS1.end())
     {
         areteExiste = true;
     }
@@ -379,57 +269,68 @@ bool Graphe::estAreteDansGraphe(int sommet1, int sommet2)
 
 Graphe Graphe::sousGrapheGi(int sommet)
 {
-    set<int> voisinsN1, voisinsN2, listeSommetsGraphe;
+    set<int>  voisinsD1, voisinsD2, listeSommetsGraphe, listeVi, listeN1, listeN2;
     Graphe gi(false);
+    
+    map<int, Sommet>::iterator itr;
+    for(itr = sommets.lower_bound(sommet); itr != sommets.end(); itr++)
+    {
+        listeVi.insert(itr ->first);
+    }
+    
+    voisinsD1 = sommets[sommet].getListeAdj();
+    voisinsD2 = distanceDeuxDuSommet(sommet);
 
-    voisinsN1 = sommets[sommet].getListeAdj();
-    voisinsN2 = distanceDeuxDuSommet(sommet);
+    set_intersection(listeVi.begin(), listeVi.end(),
+                    voisinsD1.begin(), voisinsD1.end(),
+                    inserter(listeN1,listeN1.begin()));
+
+    set_intersection(listeVi.begin(), listeVi.end(),
+                    voisinsD2.begin(), voisinsD2.end(),
+                    inserter(listeN2,listeN2.begin()));
+
 
     listeSommetsGraphe.insert(sommet);
-    set_union(voisinsN1.begin(), voisinsN1.end(),
-                voisinsN2.begin(), voisinsN2.end(),
+    set_union(listeN1.begin(), listeN1.end(),
+                listeN2.begin(), listeN2.end(),
                 inserter(listeSommetsGraphe,listeSommetsGraphe.begin()));
 
     for(int s : listeSommetsGraphe)
     {
         gi.ajouterSommet(s);
     }
-/*
-    for(int x : voisinsN1){
-        for(int y1 : voisinsN1)
+
+    for( int x : listeSommetsGraphe)
+    {
+        for(int y : listeSommetsGraphe)
         {
-            if (x != y1)
+            if(x != y)
             {
-                if(estAreteDansGraphe(x,y1))
+                if(listeN1.find(x) != listeN1.end() && listeN1.find(y) != listeN1.end())
                 {
-                    gi.ajouterArete(x,y1);
+                    if(estAreteDansGraphe(x,y))
+                    {
+                        gi.ajouterArete(x,y);
+                    }
                 }
-            }
-        }
-        for(int y2 : voisinsN2)
-        {
-            if (x != y2)
-            {
-                if(!estAreteDansGraphe(x,y2))
+                else if(listeN2.find(x) != listeN2.end() && listeN2.find(y) != listeN2.end())
                 {
-                    gi.ajouterArete(x,y2);
-                }
-            }
-        }
-    }*/
-    for(int x : voisinsN2){
-        for(int y : voisinsN2)
-        {
-            if (x != y)
-            {
-                if(estAreteDansGraphe(x,y))
+                    if(estAreteDansGraphe(x,y))
+                    {
+                        gi.ajouterArete(x,y);
+                    }
+                } 
+                else if(listeN1.find(x) != listeN1.end() && listeN2.find(y) != listeN2.end())
                 {
-                    gi.ajouterArete(x,y);
+                    if(!estAreteDansGraphe(x,y))
+                    {
+                        gi.ajouterArete(x,y);
+                    }
                 }
             }
         }
     }
- 
+
     return gi;
 }
 
@@ -452,7 +353,7 @@ int Graphe::getNbArcs()
     return nbArcs;
 }
 
-vector<Sommet>& Graphe::getSommets()
+map<int,Sommet>& Graphe::getSommets()
 {
     return sommets;
 }
