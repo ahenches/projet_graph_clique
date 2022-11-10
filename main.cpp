@@ -113,15 +113,15 @@ int main()
 
 
     /// Graphique des degres
-/*
+
     dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
     dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
     dessinerHistogrammeDegres(grapheLastFM.getNbSommet(), grapheLastFM.calculerDegres(), "degrés LastFM");
     dessinerHistogrammeDegres(grapheAleatoire1.getNbSommet(), grapheAleatoire1.calculerDegres(), "degrés Aleatoire 1");
     dessinerHistogrammeDegres(grapheAleatoire2.getNbSommet(), grapheAleatoire2.calculerDegres(), "degrés Aleatoire 2");
     dessinerHistogrammeDegres(grapheAleatoire3.getNbSommet(), grapheAleatoire3.calculerDegres(), "degrés Aleatoire 3");
-
 */
+
     /// Nombre de chemins de longueur 2
 /*
     cout << "//////////////// Nombre de chemin de longueur 2 /////////////////" << endl << endl;
@@ -134,7 +134,7 @@ int main()
 */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
-/*
+
     cout << "////////////////////////////////////////////////////////////////////////" << endl;
     cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
 
@@ -147,7 +147,7 @@ int main()
     /// Cliques Maximales
     
     vector<set<int>> cliquesMaxPetitGraphe, cliquesMaxGrapheAleatoire;
-
+/*
     cout << "/////////////////////// Cliques Maximales /////////////////////////////" << endl << endl;
     
     /// Exemple sur le premier graphe
@@ -175,20 +175,47 @@ int main()
     /// Affichage des cliques 
     for (auto clique : cliquesMaxGrapheAleatoire)
     {
-        cout << "\t";
+        cout << "\t[ ";
         for (int i : clique)
         {
             cout << i << " ";
         }
-        cout << endl;
+        cout << "]"<< endl;
     }
     cout << endl <<"\tIl y a "<< cliquesMaxGrapheAleatoire.size() << " cliques maximales" << endl << endl;
 */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 3 eme partie /////////////////////////////////////////////////////////////////
+    cout << "/////////////////////////////////////////////////////////////////////////////////////////////////////////" << endl;
+    cout << "////////////////////////////////////////////// 3ème partie //////////////////////////////////////////////" << endl << endl;
 
+    cout << "/////////////////////////// Ensemble indépendant Maximal /////////////////////////////" << endl << endl;
 
+    vector<set<int>> cliquesMax;
+    map<int, Sommet>::iterator itr;
+    for(itr = petitGraphe.getSommets().begin(); itr != petitGraphe.getSommets().end(); itr++)
+    {
+        Graphe gi = petitGraphe.sousGrapheGi(itr->first);
+        cout << "Graphe G"<<itr->first << endl;
+        cout << gi.print() <<endl;
 
+        Graphe complementaireGi = gi.complementaireGraphe();
+        cout << "Complementaire graphe G"<<itr->first << endl;
+        cout << complementaireGi.print() <<endl;
+
+        cout << "Ensemble independant maximal de G" << itr->first <<" : " << endl;
+        cliquesMax = complementaireGi.cliqueMaximaleBronKerbosch();
+        for (auto clique : cliquesMax)
+        {
+            cout << "\t[ ";
+            for (int i : clique)
+            {
+                cout << i << " ";
+            }
+            cout << "]"<< endl;
+        }
+        cout << endl<< "//////////////////////////////////////////////////////////" << endl;
+    }
 
 
 
@@ -196,14 +223,73 @@ int main()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////// Fin //////////////////////////////////////////////////////////////////////
-
-
+/*
     Graphe petitGraphe(false, 4);
     petitGraphe.ajouterArete(0,1);
     petitGraphe.ajouterArete(0,2);
     petitGraphe.ajouterArete(1,2);
     petitGraphe.ajouterArete(1,3);
+    vector<set<int>> cliquesMax;
+    map<int, Sommet>::iterator itr;
+    for(itr = petitGraphe.getSommets().begin(); itr != petitGraphe.getSommets().end(); itr++)
+    {
+        Graphe gi = petitGraphe.sousGrapheGi(itr->first);
     
+        cout << "graphe G"<<itr->first << endl;
+        cout << gi.print() <<endl;
+
+        Graphe complementaireGi = gi.complementaireGraphe();
+        
+       
+        cout << "Complementaire graphe G"<<itr->first << endl;
+        cout << complementaireGi.print() <<endl;
+
+        cout << "Ensemble independant maximal de G" << itr->first <<" : " << endl;
+         cliquesMax = complementaireGi.cliqueMaximaleBronKerbosch();
+        for (auto clique : cliquesMax)
+        {
+            cout << "\t";
+            for (int i : clique)
+            {
+                cout << i << " ";
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+
+*/
+
+/*
+    Graphe g0(false, 4);
+    g0.ajouterArete(0,1);
+    g0.ajouterArete(0,2);
+    g0.ajouterArete(0,3);
+    g0.ajouterArete(1,3);
+    cout << "graphe " << endl;
+        cout << g0.print() <<endl;
+    vector<set<int>> cliquesMax = g0.cliqueMaximaleBronKerbosch();
+    
+    for (auto clique : cliquesMax)
+        {
+            cout << "\t";
+            for (int i : clique)
+            {
+                cout << i << " ";
+            }
+            cout << endl;
+        }
+        bool test  =15;
+        
+        if (test)
+        {
+            cout << "test = true" << endl;
+        }
+        else{
+            cout << "test = false" << endl;
+
+        }
+
 
     Graphe g(false, 6);
     g.ajouterArete(0,1);
@@ -220,6 +306,6 @@ int main()
     Graphe g1 = g.sousGrapheGi(1);
     cout << g1.print();
 
-    
+    */
     return 0;
 }

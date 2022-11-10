@@ -202,9 +202,9 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
     vector<set<int>> cliqueMaxMarquees;
 
     // P (candidats) = tous les sommets du graphe
-    for(int i=0; i< nbSommet; i++)
-    {
-        candidatsClique.insert(i);
+    map<int, Sommet>::iterator itr;
+    for(itr = sommets.begin(); itr != sommets.end(); itr++)    {
+        candidatsClique.insert(itr->first);
     }
     algoBronKerboshPivot(potentielleClique,candidatsClique,sommetsTraites, cliqueMaxMarquees);
 
@@ -271,7 +271,7 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
 
 Graphe Graphe::complementaireGraphe()
 {
-    Graphe retGraphe(nbSommet);
+    Graphe retGraphe(false);
     
     retGraphe.getSommets() = sommets;
     Sommet s1;
@@ -285,7 +285,7 @@ Graphe Graphe::complementaireGraphe()
         for(itr2 = sommets.begin(); itr2 != sommets.end(); itr2++)
         {
             s2 = itr2 ->first;
-            if(!(s2 == s1.getNum()) && !estAreteDansGraphe(s1.getNum(), s2)) 
+            if(s2 != s1.getNum() && !estAreteDansGraphe(s1.getNum(), s2)) 
                 retGraphe.getSommets()[s1.getNum()].ajouterVoisin(s2);
             else
             {
