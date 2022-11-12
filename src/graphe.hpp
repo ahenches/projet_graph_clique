@@ -46,8 +46,7 @@ class Graphe {
     bool estAreteDansGraphe(int sommet1, int sommet2);
     Graphe sousGrapheGi(int sommet);
     Graphe complementaireGraphe();
-
-
+    
     int getNbSommet();
     bool getEstOriente();
     int getNbArcs();

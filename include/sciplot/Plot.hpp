@@ -219,6 +219,7 @@ class Plot
     std::string m_xrange; ///< The x-range of the plot as a gnuplot formatted string (e.g., "set xrange [0:1]")
     std::string m_yrange; ///< The y-range of the plot as a gnuplot formatted string (e.g., "set yrange [0:1]")
     HistogramStyleSpecs m_style_histogram; ///< The specs for the histogram style of the plot.
+
     TicsSpecs m_tics; ///< The specs of the tics of the plot
     TicsSpecsMajor m_xtics_major_bottom; ///< The specs for the major xtics at the bottom.
     TicsSpecsMajor m_xtics_major_top; ///< The specs for the major xtics at the top.
@@ -228,6 +229,7 @@ class Plot
     TicsSpecsMajor m_ytics_major_right; ///< The specs for the major ytics at the right.
     TicsSpecsMinor m_ytics_minor_left; ///< The specs for the minor ytics at the left.
     TicsSpecsMinor m_ytics_minor_right; ///< The specs for the minor ytics at the right.
+
     TicsSpecsMajor m_ztics_major; ///< The specs for the major ztics.
     TicsSpecsMinor m_ztics_minor; ///< The specs for the minor ztics.
     TicsSpecsMajor m_rtics_major; ///< The specs for the major rtics.

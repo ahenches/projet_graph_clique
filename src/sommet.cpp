@@ -18,10 +18,6 @@ Sommet::Sommet(int numero)
     num = numero; // pas sur de garder ça vu qu'on l'a déja dans graphe.
 }
 
-// bool Sommet::operator<(const Sommet& rhs) const 
-// {
-//     return num < rhs.num;
-// };
 
 void Sommet::ajouterVoisin(int voisin)
 {

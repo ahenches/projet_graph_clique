@@ -289,6 +289,7 @@ Graphe Graphe::complementaireGraphe()
                 retGraphe.getSommets()[s1.getNum()].ajouterVoisin(s2);
             else
             {
+                
                 // do nothing
             }
         }

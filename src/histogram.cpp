@@ -14,7 +14,6 @@ void dessinerHistogrammeDegres(int nSommet, const std::vector<int> &degresInt, s
 
     for(int i = 0 ; i < nSommet ; i++)
     {
-        names[i] = std::to_string(i);
         if (degresInt[i] != 0){
             plusGrandDegre = i;
             if (degresInt[i] > plusGrandNombreSommeMemeDegre)
@@ -22,6 +21,27 @@ void dessinerHistogrammeDegres(int nSommet, const std::vector<int> &degresInt, s
         }
     }
 
+    for(int i = 0 ; i < plusGrandDegre ; i++)
+    {
+        if (plusGrandDegre < 10){
+            names[i] = std::to_string(i);
+        }
+        else if (plusGrandDegre < 100){
+            if (i%10 == 0)
+                names[i] = std::to_string(i);
+        }
+        else if (plusGrandDegre < 1000){
+            if (i%100 == 0)
+                names[i] = std::to_string(i);
+        }
+        else {
+            if (i%250 == 0)
+                names[i] = std::to_string(i);
+        }
+        
+        // else
+            // names[i] = std::to_string(i);
+    }
     // Create a vector with the y values for the boxes
     // std::valarray<double> lDegres(degres.data(), degres.size());
     std::vector<double> degres(degresInt.begin(), degresInt.end());
@@ -54,6 +74,8 @@ void dessinerHistogrammeDegres(int nSommet, const std::vector<int> &degresInt, s
         .borderShow()
         .labelNone();
 
+    // plot.xtics()
+    //     .show(false);
     // Adjust the relative width of the boxes
     plot.boxWidthRelative(0.75);
 
@@ -64,6 +86,8 @@ void dessinerHistogrammeDegres(int nSommet, const std::vector<int> &degresInt, s
     // Create canvas to hold figure
     Canvas canvas = {{fig}};
 
+    // canvas.size(700,700);
+    // canvas
     // Show the plot in a pop-up window
     canvas.show();
 

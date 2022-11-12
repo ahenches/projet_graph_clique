@@ -34,6 +34,4 @@ class Sommet {
 
 
 
-
-
 #endif //_SOMMET_H
