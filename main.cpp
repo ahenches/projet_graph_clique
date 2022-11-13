@@ -21,15 +21,15 @@ int main()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 1 ere partie /////////////////////////////////////////////////////////////////
 
-    // cout << "////////////////////////////////////////////////////////////////////////" << endl;
-    // cout << "///////////////////////// 1ère partie /////////////////////////////////" << endl << endl;
-    // /////////////////////// Initialistations des graphes //////////////////////////
+    cout << "////////////////////////////////////////////////////////////////////////" << endl;
+    cout << "///////////////////////// 1ère partie /////////////////////////////////" << endl << endl;
+    /////////////////////// Initialistations des graphes //////////////////////////
 
-    // cout << "///////////////////// Initialisation des graphes ////////////////////" << endl << endl;
-    // /// Lecture des fichiers de la base de données de Stanford
-    //     // A executer qu'une fois ou pour reinitialiser
+    cout << "///////////////////// Initialisation des graphes ////////////////////" << endl << endl;
+    /// Lecture des fichiers de la base de données de Stanford
+        // A executer qu'une fois ou pour reinitialiser
 
-    // string fichierFacebook, fichierEmailEu, fichierLastFmAsia;
+    string fichierFacebook, fichierEmailEu, fichierLastFmAsia;
 
     // fichierFacebook = "./fichiers/facebook_combined.txt";
     // fichierEmailEu = "./fichiers/email-Eu-core.txt";
@@ -47,8 +47,8 @@ int main()
     // cout << "\tCopie du graphe dans un autre fichier"<< endl;
     // ecriture(grapheLastFM);
 
-    // /// Graphes Aleatoires
-    //     // A executer qu'une fois ou pour reinitialiser
+    /// Graphes Aleatoires
+        // A executer qu'une fois ou pour reinitialiser
 
     // int nbSommet, estOriente;
 
@@ -90,37 +90,36 @@ int main()
 
     //////////////////////////// Lecture des graphes deja enregistres //////////////////////
 
-    cout << "//////////////// Lecture des graphes déjà enregistrés /////////////////" << endl << endl;
-    Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
+    // cout << "//////////////// Lecture des graphes déjà enregistrés /////////////////" << endl << endl;
+    // Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
     // Graphe grapheEmailEu = lecture("copie_graphe_email_eu.txt");
     // Graphe grapheLastFM = lecture("copie_graphe_lastfm_asia.txt");
-    // Graphe grapheAleatoire1 = lecture("graphe_aleatoire_1.txt");
-    // Graphe grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
-    // Graphe grapheAleatoire3 = lecture("graphe_aleatoire_3.txt");
+    Graphe grapheAleatoire1 = lecture("graphe_aleatoire_1.txt");
+    Graphe grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
+    Graphe grapheAleatoire3 = lecture("graphe_aleatoire_3.txt");
 
 
-    /////////////////////////// Données sur les graphes ////////////////////////////////////
+    // /////////////////////////// Données sur les graphes ////////////////////////////////////
 
-    /// Degre Max
+    // /// Degre Max
     
     cout << "//////////////// Degré maximum des graphes /////////////////" << endl << endl;
-    cout << "\tLe degré maximum du graphe Facebook est : " << grapheFacebook.calculerDegreMax() << endl;
+    // cout << "\tLe degré maximum du graphe Facebook est : " << grapheFacebook.calculerDegreMax() << endl;
     // cout << "\tLe degré maximum du graphe Email EU est : " << grapheEmailEu.calculerDegreMax() << endl;
     // cout << "\tLe degré maximum du graphe Lastfm est : " << grapheLastFM.calculerDegreMax() << endl;
-    // cout << "\tLe degré maximum du graphe Aleatoire 1 est : " << grapheAleatoire1.calculerDegreMax() << endl;
-    // cout << "\tLe degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl;
-    // cout << "\tLe degré maximum du graphe Aleatoire 3 est : " << grapheAleatoire3.calculerDegreMax() << endl << endl;
+    cout << "\tLe degré maximum du graphe Aleatoire 1 est : " << grapheAleatoire1.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl;
+    cout << "\tLe degré maximum du graphe Aleatoire 3 est : " << grapheAleatoire3.calculerDegreMax() << endl << endl;
 
 
-    /// Graphique des degres
+    // /// Graphique des degres
 
-    dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
-    
+    // dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
     // dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
     // dessinerHistogrammeDegres(grapheLastFM.getNbSommet(), grapheLastFM.calculerDegres(), "degrés LastFM");
-    // dessinerHistogrammeDegres(grapheAleatoire1.getNbSommet(), grapheAleatoire1.calculerDegres(), "degrés Aleatoire 1");
-    // dessinerHistogrammeDegres(grapheAleatoire2.getNbSommet(), grapheAleatoire2.calculerDegres(), "degrés Aleatoire 2");
-    // dessinerHistogrammeDegres(grapheAleatoire3.getNbSommet(), grapheAleatoire3.calculerDegres(), "degrés Aleatoire 3");
+    dessinerHistogrammeDegres(grapheAleatoire1.getNbSommet(), grapheAleatoire1.calculerDegres(), "degrés Aleatoire 1");
+    dessinerHistogrammeDegres(grapheAleatoire2.getNbSommet(), grapheAleatoire2.calculerDegres(), "degrés Aleatoire 2");
+    dessinerHistogrammeDegres(grapheAleatoire3.getNbSommet(), grapheAleatoire3.calculerDegres(), "degrés Aleatoire 3");
 
 
     /// Nombre de chemins de longueur 2
