@@ -2,6 +2,16 @@
 
 using namespace std;
 
+/**
+ * @brief Lecture d un fichier provenant de la base de donnees contenant un graphe
+ * 
+ * @param nomFichier nom du fichier de la base de donnees
+ * @param separateur le separateur dans le fichier 
+ * @param estUnfichierCSV si 1 le fichier est une extension csv sinon 0
+ * @param nbSommet le nombre de sommet du graphe
+ * @param oriente si 1 le graphhe est oriente sinon 0
+ * @return retourne le graphe lu dans le fichier
+ */
 Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCSV, int nbSommet, bool oriente)
 {
     int sommetSource, sommetDest;
@@ -43,6 +53,12 @@ Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCS
     }
 }
 
+/**
+ * @brief Lecture d un fichier contenant un graphe
+ * 
+ * @param nomFichier le nom du fichier a lire
+ * @return le graphe contenu dans le fichier
+ */
 Graphe lecture(string nomFichier)
 {
     int nbSommet, sommetSource, sommetDest, indice;
@@ -96,18 +112,22 @@ Graphe lecture(string nomFichier)
     }
 }
 
-void ecriture(Graphe graphe)
+/**
+ * @brief Ecriture d un graphe dans un fichier
+ * 
+ * @param graphe graphe a ecrire dans le fichier
+ * @param nomFichier le nom du fichier dans lequel on copie le graphe
+ * @return ** void 
+ */
+void ecriture(Graphe graphe,string nomFichier)
 {
-    string nomFichier, cheminFichier;
+    string cheminFichier;
     map<int,Sommet> sommetsGraphe;
     set<int>listeAdjSommet;
     Sommet sommetSource, sommetDest;
     int  nbVoisin;
 
     cheminFichier = "./fichiers/";
-    cout << "\tEntrez le nom du fichier pour stocké le graphe : " << endl;
-    cin >> nomFichier;
-
     cheminFichier = cheminFichier + nomFichier + ".txt";
     ofstream fichier(cheminFichier.c_str()); // Ouverture en ecriture
 
@@ -143,6 +163,13 @@ void ecriture(Graphe graphe)
     }
 }
 
+/**
+ * @brief Decoupe une chaine de caractere
+ * 
+ * @param chaine La chaine a decouper
+ * @param delimiteur le caractere qui separe les elements de la chaine
+ * @return ** vector<int> contenant les elements de la chaine
+ */
 vector<int> decoupeChaine(string chaine, char delimiteur)
 {
     vector<int> chaineDecoupee;
@@ -152,6 +179,5 @@ vector<int> decoupeChaine(string chaine, char delimiteur)
     {
         chaineDecoupee.push_back(stoi(sousChaine));
     }
-
     return chaineDecoupee;
 }

@@ -15,19 +15,21 @@
 #define NB_SOMMET_FACEBOOK 4039
 #define NB_SOMMET_EMAIL_EU 1005
 #define NB_SOMMET_LASTFM 7624
+#define NB_SOMMET_ALEA_1 1000 
+#define NB_SOMMET_ALEA_2 500
+#define NB_SOMMET_ALEA_3 50
 #define ORIENTE 1
 #define NON_ORIENTE 0
 
 class Graphe {
 
     private:
-    int nbSommet;
-    bool estOriente;
-    int nbArcs;
-    std::map<int,Sommet> sommets;
+    int nbSommet; // nombre de sommet dans le graphe
+    bool estOriente; // si 1 le graphe est oriente si 0 il est non oriente
+    int nbArcs; // nombre d arcs du graphe
+    std::map<int,Sommet> sommets; //Ensemble des sommets du graphe
 
     public: 
-    
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);
     void genererArcsAleatoires();
@@ -53,10 +55,6 @@ class Graphe {
     std::map<int,Sommet>& getSommets();
     Sommet& getSommet(int i);
     void test();
-
-
-    
 };
-
 
 #endif //_GRAPHE_H
