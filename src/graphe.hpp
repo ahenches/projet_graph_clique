@@ -25,9 +25,9 @@ class Graphe {
 
     private:
     int nbSommet; // nombre de sommet dans le graphe
-    bool estOriente; // si 1 le graphe est oriente si 0 il est non oriente
+    bool estOriente; // si true le graphe est oriente si false il est non oriente
     int nbArcs; // nombre d arcs du graphe
-    std::map<int,Sommet> sommets; //Ensemble des sommets du graphe
+    std::map<int,Sommet> sommets; //Ensemble des sommets du graphe clé : nom du sommet, valeur : sommet correspondant à la clé
 
     public: 
     Graphe(bool oriente);
