@@ -44,7 +44,7 @@ class Graphe {
     int compteCheminDistanceDeux();
     std::vector<int> distanceDeuxDuSommet(int sommet);
     std::vector<std::set<int>> cliqueMaximaleBronKerbosch();
-    void algoBronKerboshPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
+    void algoBronKerboschPivot(std::set<int> r_potentielleClique, std::set<int> p_candidatsClique, std::set<int> x_sommetsTraites, std::vector<std::set<int>>& cliqueMaxMarquees);
     bool estAreteDansGraphe(int sommet1, int sommet2);
     Graphe sousGrapheGi(int sommet);
     Graphe complementaireGraphe();

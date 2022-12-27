@@ -235,7 +235,7 @@ int Graphe::compteCheminDistanceDeux()
  *       3. on recupere la liste d adjacence de chacun (sommet du milieu)
  *       4. on soustrait a la liste d adjacence du sommet du milieu celle du sommet de depart 
  *       5. on stocke la liste des sommets restants dans la listes des sommets d arrivee
- *       6. on verifie que le sommet de deart n est pas dans cette liste si c est le cas on l enleve
+ *       6. on verifie que le sommet de depart n est pas dans cette liste si c est le cas on l enleve
  *
  * @param sommet Le sommet source des chemins de longueur 2
  * @return vector<int> Les sommets a distance 2 du sommet source
@@ -262,7 +262,7 @@ vector<int> Graphe::distanceDeuxDuSommet(int sommet)
 }
 
 /**
- * @brief Retourne les cliques maximales du graphe grace a l algoritme de Bron Kerbossh avec pivot
+ * @brief Retourne les cliques maximales du graphe grace a l algoritme de Bron Kerbosch avec pivot
  * 
  * @return vector<set<int>> les cliques maximales du graphe
  */
@@ -276,13 +276,13 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
     for(itr = sommets.begin(); itr != sommets.end(); itr++)    {
         candidatsClique.insert(itr->first);
     }
-    algoBronKerboshPivot(potentielleClique,candidatsClique,sommetsTraites, cliqueMaxMarquees);
+    algoBronKerboschPivot(potentielleClique,candidatsClique,sommetsTraites, cliqueMaxMarquees);
 
     return cliqueMaxMarquees;
 }
 
 /**
- * @brief Application de l algorithme de Bron Kerbosh avec pivot
+ * @brief Application de l algorithme de Bron Kerbosch avec pivot
  * BronKerbosch(R,P,X):
  *    if P and X are both empty:
  *        report R as a maximal clique
@@ -298,7 +298,7 @@ vector<set<int>> Graphe::cliqueMaximaleBronKerbosch()
  * @param x_sommetsTraites sommets deja traites
  * @param cliqueMaxMarquees Pointeur des cliques maximales du graphe
  */
-void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees)
+void Graphe::algoBronKerboschPivot(set<int> r_potentielleClique, set<int> p_candidatsClique, set<int> x_sommetsTraites, vector<set<int>>& cliqueMaxMarquees)
 {
     Sommet pivot, sommetV;
     int numPivot;
@@ -346,7 +346,7 @@ void Graphe::algoBronKerboshPivot(set<int> r_potentielleClique, set<int> p_candi
         r_interV.insert(v);
 
         // Appel recursif
-        algoBronKerboshPivot(std::move(r_interV), std::move(pInterVoisinV), std::move(xInterVoisinV), cliqueMaxMarquees);
+        algoBronKerboschPivot(std::move(r_interV), std::move(pInterVoisinV), std::move(xInterVoisinV), cliqueMaxMarquees);
         
         // P = P \ v
         p_candidatsClique.erase(v);
