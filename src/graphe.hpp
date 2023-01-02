@@ -30,6 +30,7 @@ class Graphe {
     std::map<int,Sommet> sommets; //Ensemble des sommets du graphe clé : nom du sommet, valeur : sommet correspondant à la clé
 
     public: 
+    Graphe();
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);
     void genererArcsAleatoires();

@@ -220,6 +220,10 @@ class Plot
     std::string m_yrange; ///< The y-range of the plot as a gnuplot formatted string (e.g., "set yrange [0:1]")
     HistogramStyleSpecs m_style_histogram; ///< The specs for the histogram style of the plot.
 
+    AxisLabelSpecs m_xlabel; ///< The label of the x-axis
+    AxisLabelSpecs m_ylabel; ///< The label of the y-axis
+    AxisLabelSpecs m_rlabel; ///< The label of the r-axis
+
     TicsSpecs m_tics; ///< The specs of the tics of the plot
     TicsSpecsMajor m_xtics_major_bottom; ///< The specs for the major xtics at the bottom.
     TicsSpecsMajor m_xtics_major_top; ///< The specs for the major xtics at the top.
@@ -234,9 +238,6 @@ class Plot
     TicsSpecsMinor m_ztics_minor; ///< The specs for the minor ztics.
     TicsSpecsMajor m_rtics_major; ///< The specs for the major rtics.
     TicsSpecsMinor m_rtics_minor; ///< The specs for the minor rtics.
-    AxisLabelSpecs m_xlabel; ///< The label of the x-axis
-    AxisLabelSpecs m_ylabel; ///< The label of the y-axis
-    AxisLabelSpecs m_rlabel; ///< The label of the r-axis
     std::string m_boxwidth; ///< The default width of boxes in plots containing boxes without given widths.
     FillStyleSpecs m_style_fill; ///< The specs for the fill style of the plot elements in the plot that can be painted.
     std::string m_samples; ///< The number of sample points for functions

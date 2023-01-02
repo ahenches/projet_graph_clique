@@ -1,8 +1,6 @@
 #include "graphe.hpp"
 #include <unistd.h>
 
-unsigned int microseconds = 2000000;
-
 using namespace std;
 
 /**
@@ -10,6 +8,8 @@ using namespace std;
  * 
  * @param oriente true si le graphe est oriente sinon false
  */
+Graphe::Graphe(){};
+
 Graphe::Graphe(bool oriente)
 {
     estOriente = oriente;
