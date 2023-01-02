@@ -14,9 +14,9 @@ $ sudo dnf install gnuplot
 
 Option de Compilation : "make" dans le répertoire source
 
-Pour lancer le programme nouvelle compilé : 
+Pour lancer le programme nouvellement compilé : 
 $ main.out "Arg1" "Arg2"
 avec Arg1 comme (Create, create, c) pour générer les graphes aléatoires
 		  ou (read, Read, r) pour lire les fichiers créés contenant les graphes aléatoires (à utiliser après les avoir généré).
-	(Les graphes données issus de l'industrie sont stockés différement de comment ils sont téléchargés.)
+	(Les graphes données issus de la base de données sont stockés différement de comment ils sont téléchargés.)
 et Arg2 comme (partieX, PartieX, X) (avec X comme 1 ou 2 ou 3) pour choisir la partie désirée dans le sujet.

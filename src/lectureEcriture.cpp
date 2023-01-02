@@ -49,6 +49,7 @@ Graphe lectureFichierBDD(string nomFichier, char separateur, bool estUnfichierCS
     else // Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
+        exit(1);
         return NULL;
     }
 }
@@ -108,6 +109,7 @@ Graphe lecture(string nomFichier)
     else // Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture" << endl;
+        exit(1);
         return NULL;
     }
 }
@@ -160,6 +162,7 @@ void ecriture(Graphe graphe,string nomFichier)
     else //Probleme ouverture du fichier
     {
         cout << "ERREUR: Impossible d'ouvrir le fichier en ecriture" << endl;
+        exit(1);
     }
 }
 
