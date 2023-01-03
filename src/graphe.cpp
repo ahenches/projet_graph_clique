@@ -32,14 +32,9 @@ Graphe::Graphe(bool oriente, int nSommet)
  * @brief Genere aleatoirement les arcs du graphe 
  * 
  */
-void Graphe::genererArcsAleatoires()
+void Graphe::genererArcsAleatoires(float prob)
 {
     // calcul de la probabilite pour generer un arc 
-    float prob;
-    srand(time(nullptr));
-    prob = (float)rand() / (float)RAND_MAX;
-    cout << "\tLa probabilité des arcs est : " << prob << endl;
-
     for(long unsigned int i = 0; i < sommets.size(); i++)
     {
         for(long unsigned int j = 0; j < i; j++)

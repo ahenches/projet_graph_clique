@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <bits/stdc++.h>
 
 #include "src/histogram.hpp"
 #include "src/graphe.hpp"
@@ -11,6 +12,11 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
+	double liste_prelevement[15];
+	int indice_prelevement = 0;
+	clock_t start, end;
+	float prob = 0.1;
+
     /////////////////////// Initialistations des graphes //////////////////////////
 
     cout << "///////////////////// Initialisation des graphes ////////////////////" << endl << endl;
@@ -45,21 +51,46 @@ int main(int argc, char * argv[])
 
 		/// Premier graphe
 		cout << "Premier graphe Aleatoire " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); // mesure du temps selon : https://www.geeksforgeeks.org/measure-execution-time-with-high-precision-in-c-c/
 		grapheAleatoire1 = Graphe(ORIENTE, NB_SOMMET_ALEA_1);
-		grapheAleatoire1.genererArcsAleatoires();
+		srand(time(nullptr));
+		prob = (float)rand() / (float)RAND_MAX;
+		cout << "\tLa probabilité des arcs est : " << prob << endl;
+		grapheAleatoire1.genererArcsAleatoires(prob);
 		ecriture(grapheAleatoire1, "graphe_aleatoire_1");
+		end = clock();
+		liste_prelevement[indice_prelevement++] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[indice_prelevement-1] << setprecision(5);
+		cout << " sec " << endl;
+		
 
 		/// Deuxieme graphe
 		cout << "Deuxieme graphe Aleatoire " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		grapheAleatoire2 = Graphe(NON_ORIENTE, NB_SOMMET_ALEA_2);
-		grapheAleatoire2.genererArcsAleatoires();
+		grapheAleatoire2.genererArcsAleatoires(prob);
 		ecriture(grapheAleatoire2,"graphe_aleatoire_2");
+		end = clock();
+		liste_prelevement[indice_prelevement++] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[indice_prelevement-1] << setprecision(5);
+		cout << " sec " << endl;
 
 		/// Troisieme graphe
 		cout << "Troisieme graphe Aleatoire " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		grapheAleatoire3 = Graphe(NON_ORIENTE, NB_SOMMET_ALEA_3);
-		grapheAleatoire3.genererArcsAleatoires();
+		grapheAleatoire3.genererArcsAleatoires(prob);
 		ecriture(grapheAleatoire3, "graphe_aleatoire_3");
+		end = clock();
+		liste_prelevement[indice_prelevement++] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[indice_prelevement-1] << setprecision(5);
+		cout << " sec " << endl;
 	}
 	else 	
 	{
@@ -72,11 +103,15 @@ int main(int argc, char * argv[])
 		Graphe grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
 		Graphe grapheAleatoire3 = lecture("graphe_aleatoire_3.txt");
 	}
-
+	indice_prelevement = 3;
 	cout << "Petit graphe :" << endl;
 	
 	Graphe petitGraphe(false, 8);
-	petitGraphe.genererArcsAleatoires();
+	float proba;
+	srand(time(nullptr));
+	proba = (float)rand() / (float)RAND_MAX;
+	cout << "\tLa probabilité des arcs est : " << prob << endl;
+	petitGraphe.genererArcsAleatoires(proba);
 	cout << petitGraphe.print() << endl << endl;
 
 
@@ -100,7 +135,6 @@ int main(int argc, char * argv[])
 		cout << "\tLe degré maximum du graphe Aleatoire 2 est : " << grapheAleatoire2.calculerDegreMax() << endl;
 		cout << "\tLe degré maximum du graphe Aleatoire 3 est : " << grapheAleatoire3.calculerDegreMax() << endl << endl;
 
-
 		/// Graphique des degres
 		dessinerHistogrammeDegres(grapheFacebook.getNbSommet(), grapheFacebook.calculerDegres(), "degrés Facebook");
 		dessinerHistogrammeDegres(grapheEmailEu.getNbSommet(), grapheEmailEu.calculerDegres(), "degrés Email EU" );
@@ -113,26 +147,86 @@ int main(int argc, char * argv[])
 		/// Nombre de chemins de longueur 2
 
 		cout << "//////////////// Nombre de chemin de longueur 2 /////////////////" << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Facebook est : " << grapheFacebook.compteCheminDistanceDeux() << endl;
+		end = clock();
+		liste_prelevement[3] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[3] << setprecision(5);
+		cout << " sec " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Email EU est : " << grapheEmailEu.compteCheminDistanceDeux() << endl;
+		end = clock();
+		liste_prelevement[4] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[4] << setprecision(5);
+		cout << " sec " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Lastfm est : " << grapheLastFM.compteCheminDistanceDeux() << endl;
+		end = clock();
+		liste_prelevement[5] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[5] << setprecision(5);
+		cout << " sec " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 1 est : " << grapheAleatoire1.compteCheminDistanceDeux() << endl;
+		end = clock();
+		liste_prelevement[6] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[6] << setprecision(5);
+		cout << " sec " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 2 est : " << grapheAleatoire2.compteCheminDistanceDeux() << endl;
+		end = clock();
+		liste_prelevement[7] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[7] << setprecision(5);
+		cout << " sec " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cout << "\tLe nombre de chemin de longueur 2 du graphe Aleatoire 3 est : " << grapheAleatoire3.compteCheminDistanceDeux() << endl << endl;
-	}
+		end = clock();
+		liste_prelevement[8] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[8] << setprecision(5);
+		cout << " sec " << endl;
+		
+		if (strcmp(argv[1], "read") != 0 && strcmp(argv[1], "Read") != 0 && strcmp(argv[1], "r") != 0)
+		{
+			float temps_par_sommet = liste_prelevement[6] / NB_SOMMET_ALEA_1;
+			printf("\nPour un graphe de %d sommets avec une probabilité sur les arcs de %f, le temps d'exécution est de %f secondes par sommets\n", NB_SOMMET_ALEA_1, prob, temps_par_sommet);
+			temps_par_sommet = liste_prelevement[7] / NB_SOMMET_ALEA_2;
+			printf("\nPour un graphe de %d sommets avec une probabilité sur les arcs de %f, le temps d'exécution est de %f secondes par sommets\n", NB_SOMMET_ALEA_2, prob, temps_par_sommet);
+			temps_par_sommet = liste_prelevement[8] / NB_SOMMET_ALEA_3;
+			printf("\nPour un graphe de %d sommets avec une probabilité sur les arcs de %f, le temps d'exécution est de %f secondes par sommets\n", NB_SOMMET_ALEA_3, prob, temps_par_sommet);
+		}
+		else 
+		{
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[6] << setprecision(5) << " par secondes" << endl;
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[7] << setprecision(5) << " par secondes" << endl;
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[8] << setprecision(5) << " par secondes" << endl;
+		}
+
+	}   
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////// 2 eme partie /////////////////////////////////////////////////////////////////
-	else if (strcmp(argv[2], "partie2") == 0 || strcmp(argv[2], "Partie2") == 0 || strcmp(argv[2], "2") == 0)
-	{
-		cout << "////////////////////////////////////////////////////////////////////////" << endl;
-		cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
+    else if (strcmp(argv[2], "partie2") == 0 || strcmp(argv[2], "Partie2") == 0 || strcmp(argv[2], "2") == 0)
+    {   
+        cout << "////////////////////////////////////////////////////////////////////////" << endl;
+        cout << "///////////////////////// 2ème partie /////////////////////////////////" << endl << endl;
 
-		/// Cliques Maximales
-		
-		vector<set<int>> cliquesMaxPetitGraphe, cliquesMaxGrapheAleatoire;
+        /// Cliques Maximales
+    
+        vector<set<int>> cliquesMaxPetitGraphe, cliquesMaxGrapheAleatoire;
 
-		cout << "/////////////////////// Cliques Maximales /////////////////////////////" << endl << endl;
-		
+        cout << "/////////////////////// Cliques Maximales /////////////////////////////" << endl << endl;
+    
+
 		/// Exemple sur le premier graphe
 		cout << "\tExemple sur le petit graphe " << endl;
 		cout << "\tCliques maximales : " << endl;

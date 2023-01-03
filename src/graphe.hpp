@@ -15,8 +15,8 @@
 #define NB_SOMMET_FACEBOOK 4039
 #define NB_SOMMET_EMAIL_EU 1005
 #define NB_SOMMET_LASTFM 7624
-#define NB_SOMMET_ALEA_1 1000 
-#define NB_SOMMET_ALEA_2 500
+#define NB_SOMMET_ALEA_1 700 
+#define NB_SOMMET_ALEA_2 300
 #define NB_SOMMET_ALEA_3 50
 #define ORIENTE 1
 #define NON_ORIENTE 0
@@ -33,7 +33,7 @@ class Graphe {
     Graphe();
     Graphe(bool oriente);
     Graphe(bool oriente, int nbSommet);
-    void genererArcsAleatoires();
+    void genererArcsAleatoires(float prob);
     bool ajouterSommet(int num);
     void ajouterArc(int source, int destination);
     void ajouterArete(int s1, int s2);
