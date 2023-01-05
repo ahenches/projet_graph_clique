@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstring>
 #include <bits/stdc++.h>
+#include <unistd.h>
 
 #include "src/histogram.hpp"
 #include "src/graphe.hpp"
@@ -96,12 +97,12 @@ int main(int argc, char * argv[])
 	{
 		//////////////////////////// Lecture des graphes deja enregistres //////////////////////
 		cout << "//////////////// Lecture des graphes déjà enregistrés /////////////////" << endl << endl;
-		Graphe grapheFacebook = lecture("copie_graphe_facebook.txt");
-		Graphe grapheEmailEu = lecture("copie_graphe_email_eu.txt");
-		Graphe grapheLastFM = lecture("copie_graphe_lastfm_asia.txt");
-		Graphe grapheAleatoire1 = lecture("graphe_aleatoire_1.txt");
-		Graphe grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
-		Graphe grapheAleatoire3 = lecture("graphe_aleatoire_3.txt");
+		grapheFacebook = lecture("copie_graphe_facebook.txt");
+		grapheEmailEu = lecture("copie_graphe_email_eu.txt");
+		grapheLastFM = lecture("copie_graphe_lastfm_asia.txt");
+		grapheAleatoire1 = lecture("graphe_aleatoire_1.txt");
+		grapheAleatoire2 = lecture("graphe_aleatoire_2.txt");
+		grapheAleatoire3 = lecture("graphe_aleatoire_3.txt");
 	}
 	indice_prelevement = 3;
 	cout << "Petit graphe :" << endl;
@@ -207,9 +208,9 @@ int main(int argc, char * argv[])
 		}
 		else 
 		{
-			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[6] << setprecision(5) << " par secondes" << endl;
-			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[7] << setprecision(5) << " par secondes" << endl;
-			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " avec une probabilité sur les arcs de " << prob << ", le temps d'exécution est de " << liste_prelevement[8] << setprecision(5) << " par secondes" << endl;
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_1 << " le temps d'exécution est de " << liste_prelevement[6] << setprecision(5) << " secondes" << endl;
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_2 << " le temps d'exécution est de " << liste_prelevement[7] << setprecision(5) << " secondes" << endl;
+			cout << "Pour un graphe de " << NB_SOMMET_ALEA_3 << " le temps d'exécution est de " << liste_prelevement[8] << setprecision(5) << " secondes" << endl;
 		}
 
 	}   
@@ -230,7 +231,14 @@ int main(int argc, char * argv[])
 		/// Exemple sur le premier graphe
 		cout << "\tExemple sur le petit graphe " << endl;
 		cout << "\tCliques maximales : " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cliquesMaxPetitGraphe = petitGraphe.cliqueMaximaleBronKerbosch();
+		end = clock();
+		liste_prelevement[9] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[9] << setprecision(5);
+		cout << " sec " << endl;
 		
 		/// Affichage des cliques
 		for (auto clique : cliquesMaxPetitGraphe)
@@ -245,10 +253,17 @@ int main(int argc, char * argv[])
 		cout << endl << "\tIl y a "<< cliquesMaxPetitGraphe.size() << " cliques maximales" << endl << endl;
 		
 		/// Exemple sur le deuxième graphe 
-		cout << endl << "\tExemple sur un graphe aléatoire " << endl;
+		cout << endl << "\tExemple sur un graphe aléatoire de taille " << grapheAleatoire3.getNbSommet() << endl;
 		cout << "\tCliques maximales : " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPrélèvement du temps ICI" << endl;
+		start = clock(); 
 		cliquesMaxGrapheAleatoire = grapheAleatoire3.cliqueMaximaleBronKerbosch();
-		
+		end = clock();
+		liste_prelevement[10] = double(end - start) / double(CLOCKS_PER_SEC);
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tTemps parcouru depuis la dernier début de prélèvement : " << fixed 
+			 << liste_prelevement[10] << setprecision(5);
+		cout << " sec " << endl;
+		sleep(1);
 		/// Affichage des cliques 
 		for (auto clique : cliquesMaxGrapheAleatoire)
 		{
